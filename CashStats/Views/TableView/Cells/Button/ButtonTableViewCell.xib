@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="171" id="KGk-i7-Jjw" customClass="ButtonTableViewCell" customModule="CashStats" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="171"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="171"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HzD-9N-D89">
+                        <rect key="frame" x="16" y="11" width="288" height="149"/>
+                        <inset key="contentEdgeInsets" minX="12" minY="8" maxX="12" maxY="8"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="HzD-9N-D89" secondAttribute="trailing" id="1kM-si-R5D"/>
+                    <constraint firstItem="HzD-9N-D89" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="4BI-w1-XvW"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="HzD-9N-D89" secondAttribute="bottom" id="o9h-7k-jVr"/>
+                    <constraint firstItem="HzD-9N-D89" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="qxU-Rb-3xO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="button" destination="HzD-9N-D89" id="48M-xr-nr1"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="159.04017857142856"/>
+        </tableViewCell>
+    </objects>
+</document>

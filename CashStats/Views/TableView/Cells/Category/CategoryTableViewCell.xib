@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="172" id="Yll-4e-OsV" customClass="CategoryTableViewCell" customModule="CashStats" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="172"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Yll-4e-OsV" id="TJb-NW-X7T">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="172"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Еда" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQm-9i-rWF">
+                        <rect key="frame" x="18" y="12" width="378" height="93"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJ4-HP-yFd" customClass="DiagramSausageView" customModule="CashStats" customModuleProvider="target">
+                        <rect key="frame" x="18" y="111" width="378" height="28"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="eG6-dT-REB"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,123.23 / 4,000 $" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1h1-Ex-l36">
+                        <rect key="frame" x="280.5" y="143" width="115.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Траты за месяц" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAa-ap-1L2">
+                        <rect key="frame" x="18" y="143" width="250.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="AAa-ap-1L2" secondAttribute="bottom" constant="12" id="88a-NM-bR4"/>
+                    <constraint firstItem="iJ4-HP-yFd" firstAttribute="top" secondItem="qQm-9i-rWF" secondAttribute="bottom" constant="6" id="CUY-fR-yBh"/>
+                    <constraint firstAttribute="bottom" secondItem="1h1-Ex-l36" secondAttribute="bottom" constant="12" id="HDd-3x-RfB"/>
+                    <constraint firstAttribute="trailing" secondItem="qQm-9i-rWF" secondAttribute="trailing" constant="18" id="HYC-fG-tdj"/>
+                    <constraint firstItem="AAa-ap-1L2" firstAttribute="leading" secondItem="TJb-NW-X7T" secondAttribute="leading" constant="18" id="Hob-mC-GVQ"/>
+                    <constraint firstAttribute="trailing" secondItem="1h1-Ex-l36" secondAttribute="trailing" constant="18" id="Ize-Ns-sJX"/>
+                    <constraint firstItem="1h1-Ex-l36" firstAttribute="leading" secondItem="AAa-ap-1L2" secondAttribute="trailing" constant="12" id="NUo-pU-qs0"/>
+                    <constraint firstItem="qQm-9i-rWF" firstAttribute="top" secondItem="TJb-NW-X7T" secondAttribute="top" constant="12" id="Tbs-zB-4oR"/>
+                    <constraint firstAttribute="trailing" secondItem="iJ4-HP-yFd" secondAttribute="trailing" constant="18" id="VXy-KD-c1Z"/>
+                    <constraint firstItem="AAa-ap-1L2" firstAttribute="top" secondItem="iJ4-HP-yFd" secondAttribute="bottom" constant="4" id="agL-HF-JB0"/>
+                    <constraint firstItem="iJ4-HP-yFd" firstAttribute="leading" secondItem="TJb-NW-X7T" secondAttribute="leading" constant="18" id="c6x-QT-v5k"/>
+                    <constraint firstItem="1h1-Ex-l36" firstAttribute="top" secondItem="iJ4-HP-yFd" secondAttribute="bottom" constant="4" id="pN7-dy-o2p"/>
+                    <constraint firstItem="qQm-9i-rWF" firstAttribute="leading" secondItem="TJb-NW-X7T" secondAttribute="leading" constant="18" id="vhM-oo-SAE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="diagramSausage" destination="iJ4-HP-yFd" id="45G-B0-aJT"/>
+                <outlet property="periodLabel" destination="AAa-ap-1L2" id="hVi-GQ-IzX"/>
+                <outlet property="rangeLabel" destination="1h1-Ex-l36" id="wi5-kn-e0j"/>
+                <outlet property="titleLabel" destination="qQm-9i-rWF" id="Ida-hd-cBe"/>
+            </connections>
+            <point key="canvasLocation" x="550.72463768115949" y="71.651785714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
