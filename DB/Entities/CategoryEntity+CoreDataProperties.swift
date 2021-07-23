@@ -2,7 +2,7 @@
 //  CategoryEntity+CoreDataProperties.swift
 //  DB
 //
-//  Created by GGsrvg on 09.07.2021.
+//  Created by GGsrvg on 12.07.2021.
 //
 //
 
@@ -16,11 +16,11 @@ extension CategoryEntity {
         return NSFetchRequest<CategoryEntity>(entityName: "CategoryEntity")
     }
 
-    @NSManaged public var colorHEX: String?
-    @NSManaged public var spentFunds: NSDecimalNumber?
-    @NSManaged public var name: String?
+    @NSManaged public var colorHEX: Int64
     @NSManaged public var fundsLimit: NSDecimalNumber?
+    @NSManaged public var name: String?
     @NSManaged public var periodType: String?
+    @NSManaged public var spentFunds: NSDecimalNumber?
     @NSManaged public var consumptions: NSSet?
 
 }

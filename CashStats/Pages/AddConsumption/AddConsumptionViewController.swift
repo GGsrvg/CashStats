@@ -2,13 +2,19 @@
 //  AddConsumptionViewController.swift
 //  CashStats
 //
-//  Created by GGsrvg on 01.07.2021.
+//  Created by GGsrvg on 13.07.2021.
 //
 
 import UIKit
 import LDS
 
-class AddConsumptionViewController: BaseViewController<AddConsumptionViewModel> {
+class AddConsumptionViewController: BaseViewController<AddConsumptionViewModel, AddConsumptionDataInitViewController> {
+
+    override class func initWith(_ data: AddConsumptionDataInitViewController?) -> Self {
+        guard let data = data else { fatalError("need set data") }
+        
+        return AddConsumptionViewController(viewModel: AddConsumptionViewModel(category: data.category)) as! Self
+    }
     
     var adapter: UITableViewAdapter<String?, AddConsumptionContentType, String?>!
     
@@ -21,55 +27,37 @@ class AddConsumptionViewController: BaseViewController<AddConsumptionViewModel> 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Add cunsumption" 
+        navigationItem.title = "Add Consumption"
         navigationItem.rightBarButtonItems = [
-            .init(systemItem: .save, primaryAction: UIAction(handler: { action in
+            .init(systemItem: .add, primaryAction: .init(handler: { action in
                 self.viewModel.save()
-            }), menu: nil)
+            }))
         ]
         
-        adapter = .init(tableView)
-        adapter.observableDataSource = viewModel.fields
+        adapter = .init(self.tableView)
+        adapter.observableDataSource = self.viewModel.fields
         adapter.cellForRowHandler = { tableView, indexPath, model in
-            let commonCell: UITableViewCell
+            let cell: UITableViewCell
             
             switch model {
             case .textField(model: let model):
-                let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.reuseIdentifier, for: indexPath)
-                commonCell = cell
+                cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.reuseIdentifier, for: indexPath)
                 
                 if let cell = cell as? TextFieldTableViewCell {
                     cell.model = model
                 }
-            case .segmentedControl(model: let model):
-                let cell = tableView.dequeueReusableCell(withIdentifier: SegmentControlTableViewCell.reuseIdentifier, for: indexPath)
-                commonCell = cell
+            case .date(model: let model):
+                cell = tableView.dequeueReusableCell(withIdentifier: DateTableViewCell.reuseIdentifier, for: indexPath)
                 
-                if let cell = cell as? SegmentControlTableViewCell {
-                    cell.model = model
-                }
-            case .button(model: let model):
-                let cell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.reuseIdentifier, for: indexPath)
-                commonCell = cell
-                
-                if let cell = cell as? ButtonTableViewCell {
-                    cell.model = model
-                }
-            case .colorWell(model: let model):
-                let cell = tableView.dequeueReusableCell(withIdentifier: ColorWellTableViewCell.reuseIdentifier, for: indexPath)
-                commonCell = cell
-                
-                if let cell = cell as? ColorWellTableViewCell {
+                if let cell = cell as? DateTableViewCell {
                     cell.model = model
                 }
             }
             
-            return commonCell
+            return cell
         }
         tableView.register(fromNib: TextFieldTableViewCell.self)
-        tableView.register(fromNib: SegmentControlTableViewCell.self)
-        tableView.register(fromNib: ButtonTableViewCell.self)
-        tableView.register(cell: ColorWellTableViewCell.self)
+        tableView.register(fromNib: DateTableViewCell.self)
         tableView.dataSource = adapter
     }
 }

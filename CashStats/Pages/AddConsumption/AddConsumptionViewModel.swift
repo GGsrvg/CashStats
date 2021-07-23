@@ -2,73 +2,64 @@
 //  AddConsumptionViewModel.swift
 //  CashStats
 //
-//  Created by GGsrvg on 01.07.2021.
+//  Created by GGsrvg on 13.07.2021.
 //
 
-import Foundation
-import DTO
 import LDS
+import DB
 
 class AddConsumptionViewModel: BaseViewModel {
     
-    private var observation: NSKeyValueObservation?
-    
     let fields: ObservableDataSourceOneDimension<AddConsumptionContentType> = .init()
     
-    lazy var nameTextField: TextFieldPresenter = .init(
-        title: "Name",
-        placeholder: nil,
+    private let name = TextFieldPresenter(
+        title: "name",
+        placeholder: "01.01.2020",
         value: nil,
         keyboardType: .default
     )
     
-    lazy var costsLimitTextField: TextFieldPresenter = .init(
-        title: "Costs limit",
-        placeholder: nil,
+    private let price = TextFieldPresenter(
+        title: "price",
+        placeholder: "300",
         value: nil,
         keyboardType: .decimalPad
     )
     
-    lazy var typeSegmentedControl: SegmentControlPresenter = .init(
-        segments: [
-            .init(id: 0, title: "Month"),
-            .init(id: 1, title: "Year")
-        ]
-    )
+    private let date = DatePresenter(date: Date())
     
-    lazy var selectColorWell: ColorWellPresenter = .init(
-        title: "Select color",
-        selectedColor: .red
-    )
+    private let category: CategoryEntity
     
-    required init() {
+    required init(category: CategoryEntity) {
+        self.category = category
         super.init()
-        
         fields.set([
-            .textField(model: nameTextField),
-            .textField(model: costsLimitTextField),
-            .segmentedControl(model: typeSegmentedControl),
-            .colorWell(model: selectColorWell)
+            .textField(model: name),
+            .textField(model: price),
+            .date(model: date),
         ])
     }
     
+    required init() {
+        fatalError("init() has not been implemented")
+    }
+    
     func save() {
-        guard let name = self.nameTextField.value,
-              let periodLimit = Decimal(string: self.costsLimitTextField.value ?? ""),
-              let colorHEX = self.selectColorWell.selectedColor?.rgb()
+        guard let name = self.name.value,
+              let price = Decimal(string: self.price.value ?? "0"),
+              !name.isEmpty && price != 0
         else { return }
         
-        let typeSegment = self.typeSegmentedControl.segments[self.typeSegmentedControl.selectedId]
+        let date = self.date.date
         
-        let category = DTO.Category(
-            name: name,
-            colorHEX: colorHEX,
-            spentFunds: periodLimit * 0.23,
-            fundsLimit: periodLimit,
-            periodType: typeSegment.id == 0 ? .month : .year
-        )
+        let consumption = ConsumptionEntity(entity: .entity(forEntityName: "ConsumptionEntity", in: bl.db.context)!, insertInto: nil)
+        consumption.name = name
+        consumption.price = NSDecimalNumber(decimal: price)
+        consumption.date = date
         
-        self.bl.category.add(models: [category])
+        
+        self.bl.consumption.add(models: [consumption], to: category)
+//            .add(models: [.init(id: "", date: date, name: name, price: price * -1)], to: category)
             .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
             .sink { [weak self] end in
@@ -80,6 +71,5 @@ class AddConsumptionViewModel: BaseViewModel {
                 }
             } receiveValue: { output in }
             .store(in: &bag)
-
     }
 }

@@ -9,14 +9,14 @@ import Foundation
 import Combine
 import BL
 
-class BaseViewModel {
+class BaseViewModel: NSObject {
     var bag = Set<AnyCancellable>()
     
     let coordinator = Consts.coordinator
     
     var bl: BL = Consts.bisnesLayer
     
-    required init() {
+    required override init() {
         
     }
 }

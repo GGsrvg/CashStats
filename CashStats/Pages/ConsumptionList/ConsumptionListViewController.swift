@@ -7,10 +7,19 @@
 
 import UIKit
 import LDS
+import DB
 
-class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel> {
+class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel, ConsumptionListDataInitViewController> {
     
-    var adapter: UITableViewAdapter<String, ConsumptionPresenter, String?>!
+    override class func initWith(_ data: ConsumptionListDataInitViewController?) -> Self {
+        guard let data = data else { fatalError("data need set") }
+        
+        return ConsumptionListViewController(viewModel: ConsumptionListViewModel(category: data.category)) as! Self
+    }
+    
+    var adapter: UITableViewAdapter<String, ConsumptionEntity, String?>!
+    
+    let refreshControl = UIRefreshControl()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,6 +30,20 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Consumptions"
+        navigationItem.rightBarButtonItems = [
+            .init(systemItem: .add, primaryAction: .init() { action in
+                self.navigationController?.pushViewController(
+                    AddConsumptionViewController.initWith(
+                        AddConsumptionDataInitViewController(
+                            category: self.viewModel.category
+                        )
+                    ),
+                    animated: true
+                )
+            }, menu: nil)
+        ]
+        
         adapter = .init(tableView)
         adapter.observableDataSource = viewModel.сonsumptions
         adapter.titleForHeaderSectionHandler = { [weak self] tableView, section in
@@ -29,23 +52,20 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
         }
         adapter.cellForRowHandler = { tableView, indexPath, model in
             let cell = tableView.dequeueReusableCell(withIdentifier: ConsumptionTableViewCell.reuseIdentifier, for: indexPath)
-            
+            if let cell = cell as? ConsumptionTableViewCell{
+                cell.model = model
+            }
             return cell
+        }
+        adapter.numberOfSectionsHandler = { _, _ in
+            self.refreshControl.endRefreshing()
         }
         tableView.register(fromNib: ConsumptionTableViewCell.self)
         tableView.dataSource = adapter
-        // Do any additional setup after loading the view.
+        
+        refreshControl.addAction(.init(handler: { _ in
+            self.viewModel.load()
+        }), for: .valueChanged)
+        tableView.refreshControl = refreshControl
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

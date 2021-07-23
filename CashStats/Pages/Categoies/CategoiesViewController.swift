@@ -7,14 +7,19 @@
 
 import UIKit
 import LDS
+import DB
 
-class CategoiesViewController: BaseViewController<CategoiesViewModel> {
+class CategoiesViewController: BaseViewController<CategoiesViewModel, EmptyDataInitViewController> {
+    
+    override class func initWith(_ data: EmptyDataInitViewController?) -> Self {
+        return CategoiesViewController(viewModel: CategoiesViewModel()) as! Self
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
     let refreshControl = UIRefreshControl()
     
-    var adapter: UITableViewAdapter<String?, CategoryTableViewCellPresenter, String?>!
+    var adapter: UITableViewAdapter<String?, CategoryEntity, String?>!
     
     deinit {
         adapter?.observableDataSource = nil
@@ -25,10 +30,10 @@ class CategoiesViewController: BaseViewController<CategoiesViewModel> {
 
         title = "Categories"
         navigationItem.backButtonTitle = "Back"
-        
         navigationItem.rightBarButtonItems = [
             .init(systemItem: .add, primaryAction: .init(title: "test") { action in
-                self.navigationController?.pushViewController(AddConsumptionViewController(), animated: true)
+                let vc = AddCategoryViewController.initWith(nil)
+                self.navigationController?.pushViewController(vc, animated: true)
             }, menu: nil)
         ]
         
@@ -37,12 +42,12 @@ class CategoiesViewController: BaseViewController<CategoiesViewModel> {
             let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.reuseIdentifier, for: indexPath)
             
             if let cell = cell as? CategoryTableViewCell {
-                cell.presenter = model
+                cell.model = model
             }
             
             return cell
         }
-        adapter.numberOfItemsInSectionHandler = { _, _, _ in
+        adapter.numberOfSectionsHandler = { _, _ in
             self.refreshControl.endRefreshing()
         }
         adapter.observableDataSource = viewModel.categories
@@ -50,11 +55,8 @@ class CategoiesViewController: BaseViewController<CategoiesViewModel> {
         tableView.dataSource = adapter
         tableView.delegate = self
         
-        
         refreshControl.addAction(.init(handler: { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-                self.viewModel.requestOnGet()
-            }
+            self.viewModel.load()
         }), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
@@ -64,6 +66,13 @@ extension CategoiesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        self.navigationController?.pushViewController(ConsumptionListViewController(), animated: true)
+        let entity = self.viewModel.categories.array[indexPath.row]
+        
+        self.navigationController?.pushViewController(
+            ConsumptionListViewController.initWith(
+                ConsumptionListDataInitViewController(category: entity)
+            ),
+            animated: true
+        )
     }
 }

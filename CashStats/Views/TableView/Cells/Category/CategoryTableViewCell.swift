@@ -6,14 +6,13 @@
 //
 
 import UIKit
+import DB
 
 class CategoryTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var diagramSausage: DiagramSausageView! { didSet {
         diagramSausage.layer.cornerRadius = 6
-        diagramSausage.layer.borderWidth = 2
-        diagramSausage.layer.borderColor = UIColor.black.cgColor
         diagramSausage.layer.masksToBounds = true
     }}
     
@@ -21,15 +20,25 @@ class CategoryTableViewCell: UITableViewCell {
     
     @IBOutlet weak var rangeLabel: UILabel!
     
-    weak var presenter: CategoryTableViewCellPresenter? { didSet {
-        guard let presenter = presenter else { return }
+    weak var model: CategoryEntity? { didSet {
+        guard let model = model else { return }
         
-        titleLabel.text = presenter.title
-        periodLabel.text = presenter.periodName
-        rangeLabel.text = "\(presenter.spentFunds) / \(presenter.fundsLimit) $"
+        titleLabel.text = model.name
+        periodLabel.text = model.periodType
         
-        diagramSausage.addItem(.init(color: presenter.periodColor, numberVotes: UInt(truncating: NSDecimalNumber(decimal: presenter.spentFunds))))
-        diagramSausage.addItem(.init(color: .white, numberVotes: UInt(truncating: NSDecimalNumber(decimal:presenter.fundsLimit - presenter.spentFunds))))
+        rangeLabel.text = "\(model.spentFunds ?? 0) / \(model.fundsLimit ?? 0) $"
+        
+        let intSpentFunds = UInt(truncating: model.spentFunds ?? 0)
+        let intFundsLimit = UInt(truncating: model.fundsLimit ?? 0)
+        
+        diagramSausage.addItem(.init(
+            color: UIColor(rgb: Int(model.colorHEX)),
+            numberVotes: intSpentFunds
+        ))
+        diagramSausage.addItem(.init(
+            color: .systemFill,
+            numberVotes: intFundsLimit - intSpentFunds
+        ))
     }}
     
     override func prepareForReuse() {

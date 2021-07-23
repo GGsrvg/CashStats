@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         let coordinator = Consts.coordinator
-        coordinator.setRoot(CategoiesViewController())
+        coordinator.setRoot(CategoiesViewController.initWith(nil))
         let navigationController = coordinator.getSuperViewController()
         window.rootViewController = navigationController
         self.window = window

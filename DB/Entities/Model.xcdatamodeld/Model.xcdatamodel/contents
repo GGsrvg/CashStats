@@ -6,7 +6,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="periodType" optional="YES" attributeType="String"/>
         <attribute name="spentFunds" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
-        <relationship name="consumptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ConsumptionEntity" inverseName="categories" inverseEntity="ConsumptionEntity"/>
+        <relationship name="consumptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ConsumptionEntity" inverseName="category" inverseEntity="ConsumptionEntity"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="name"/>
@@ -17,10 +17,10 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
-        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="consumptions" inverseEntity="CategoryEntity"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryEntity" inverseName="consumptions" inverseEntity="CategoryEntity"/>
     </entity>
     <elements>
-        <element name="CategoryEntity" positionX="184.87939453125" positionY="34.97311401367188" width="128" height="119"/>
+        <element name="CategoryEntity" positionX="184.87939453125" positionY="34.97311401367188" width="128" height="133"/>
         <element name="ConsumptionEntity" positionX="-87.29010009765625" positionY="-50.8909912109375" width="128" height="103"/>
     </elements>
 </model>

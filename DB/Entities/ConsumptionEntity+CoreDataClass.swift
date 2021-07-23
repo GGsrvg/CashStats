@@ -13,3 +13,7 @@ import CoreData
 public class ConsumptionEntity: NSManagedObject {
 
 }
+
+extension ConsumptionEntity: Entity {
+    
+}
