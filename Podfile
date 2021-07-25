@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '14.0'
+platform :ios, '14.0'
 
 target 'CashStats' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -15,7 +15,7 @@ target 'DTO' do
   
   # Pods for DTO
   
-ends
+end
 
 target 'BL' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -30,6 +30,7 @@ target 'DB' do
   use_frameworks!
   
   # Pods for DB
+  pod 'GRDB.swift', '~> 5.8'
   
 end
 

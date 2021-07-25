@@ -5,8 +5,8 @@
 //  Created by GGsrvg on 20.07.2021.
 //
 
-import DB
+import DTO
 
 struct AddConsumptionDataInitViewController: BaseDataInitViewController {
-    let category: CategoryEntity
+    let category: DTO.Category
 }

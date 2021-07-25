@@ -8,10 +8,12 @@
 import UIKit
 import LDS
 
-class AddCategoryViewController: BaseViewController<AddCategoryViewModel, EmptyDataInitViewController> {
+class AddCategoryViewController: BaseViewController<AddCategoryViewModel, AddCategoryDataInitViewController> {
     
-    override class func initWith(_ data: EmptyDataInitViewController?) -> Self {
-        return AddCategoryViewController(viewModel: AddCategoryViewModel()) as! Self
+    override class func initWith(_ data: AddCategoryDataInitViewController?) -> Self {
+        let vm = AddCategoryViewModel()
+        vm.category = data?.category
+        return AddCategoryViewController(viewModel: vm) as! Self
     }
     
     var adapter: UITableViewAdapter<String?, AddCategoryContentType, String?>!

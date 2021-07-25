@@ -7,39 +7,52 @@
 
 import Foundation
 
-//public struct Category {
-//    public let id: String
-//    public var name: String
-//    public var colorHEX: Int
-//    /// средств потраченных в текущем периоде
-//    public var spentFunds: Decimal
-//    /// лимит средств на определенный период
-//    public var fundsLimit: Decimal
-//    public var periodType: CategoryType
-//    //    public var consumptions: NSSet?
-//    
-//    
-//    public init(
-//        id: String,
-//        name: String,
-//        colorHEX: Int,
-//        spentFunds: Decimal,
-//        fundsLimit: Decimal,
-//        periodType: CategoryType
-//    ) {
-//        self.id = id
-//        self.name = name
-//        self.colorHEX = colorHEX
-//        self.spentFunds = spentFunds
-//        self.fundsLimit = fundsLimit
-//        self.periodType = periodType
+public struct Category: Codable {
+    public var id: Int64?
+    public let date: Date
+    public var name: String
+    public var colorHEX: Int
+    /// средств потраченных в текущем периоде
+    public var spentFunds: Double
+    /// лимит средств на определенный период
+    public var fundsLimit: Double
+    public var periodTypeInt: Int
+    public var periodType: CategoryType? { get {
+        return CategoryType(rawValue: self.periodTypeInt)
+    } }
+    
+    
+    public init(
+        date: Date,
+        name: String,
+        colorHEX: Int,
+        spentFunds: Double,
+        fundsLimit: Double,
+        periodTypeInt: Int
+    ) {
+        self.date = date
+        self.name = name
+        self.colorHEX = colorHEX
+        self.spentFunds = spentFunds
+        self.fundsLimit = fundsLimit
+        self.periodTypeInt = periodTypeInt
+    }
+    
+}
+
+extension Category: Hashable {
+//    public static func == (lhs: Category, rhs: Category) -> Bool {
+//        lhs === rhs
 //    }
 //    
-//}
-//
-//public extension Category {
-//    enum CategoryType: String {
-//        case month = "month"
-//        case year = "year"
+//    public func hash(into hasher: inout Hasher) {
+//        
 //    }
-//}
+}
+
+public extension Category {
+    enum CategoryType: Int {
+        case month = 0
+        case year = 1
+    }
+}

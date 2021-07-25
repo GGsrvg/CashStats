@@ -7,7 +7,7 @@
 
 import UIKit
 import LDS
-import DB
+import DTO
 
 class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel, ConsumptionListDataInitViewController> {
     
@@ -17,7 +17,7 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
         return ConsumptionListViewController(viewModel: ConsumptionListViewModel(category: data.category)) as! Self
     }
     
-    var adapter: UITableViewAdapter<String, ConsumptionEntity, String?>!
+    var adapter: UITableViewAdapter<String, DTO.Category, String?>!
     
     let refreshControl = UIRefreshControl()
     

@@ -5,8 +5,7 @@
 //  Created by GGsrvg on 01.07.2021.
 //
 
-import CoreData
-import DB
+import DTO
 import LDS
 
 class AddCategoryViewModel: BaseViewModel {
@@ -41,6 +40,13 @@ class AddCategoryViewModel: BaseViewModel {
         selectedColor: .red
     )
     
+    var category: DTO.Category? { didSet {
+        nameTextField.value = category?.name
+        costsLimitTextField.value = category?.fundsLimit == nil ? nil : String(category!.fundsLimit)
+        typeSegmentedControl.selectedId = category?.periodTypeInt ?? 0
+        selectColorWell.selectedColor = category?.colorHEX == nil ? nil : UIColor(rgb: category!.colorHEX)
+    }}
+    
     required init() {
         super.init()
         
@@ -54,20 +60,24 @@ class AddCategoryViewModel: BaseViewModel {
     
     func save() {
         guard let name = self.nameTextField.value,
-              let periodLimit = Decimal(string: self.costsLimitTextField.value ?? "0"),
+              let fundsLimit = Double(self.costsLimitTextField.value ?? "0"),
               let colorHEX = self.selectColorWell.selectedColor?.rgb()
         else { return }
 
         let typeSegment = self.typeSegmentedControl.segments[self.typeSegmentedControl.selectedId]
         
-        let category = CategoryEntity(entity: .entity(forEntityName: "CategoryEntity", in: bl.db.context)!, insertInto: nil)
-        category.name = name
-        category.colorHEX = Int64(colorHEX)
-        category.spentFunds = NSDecimalNumber(decimal: periodLimit * 0.23)
-        category.fundsLimit = NSDecimalNumber(decimal: periodLimit)
-        category.periodType = typeSegment.id == 0 ? "Month" : "Year"
+        var category = DTO.Category(
+            date: Date(),
+            name: name,
+            colorHEX: colorHEX,
+            spentFunds: 0,
+            fundsLimit: fundsLimit,
+            periodTypeInt: typeSegment.id
+        )
         
-        self.bl.category.add(models: [category])
+        category.id = self.category?.id
+        
+        self.bl.category.save(model: category)
             .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
             .sink { [weak self] end in

@@ -7,7 +7,7 @@
 
 import UIKit
 import LDS
-import DB
+import DTO
 
 class CategoiesViewController: BaseViewController<CategoiesViewModel, EmptyDataInitViewController> {
     
@@ -19,7 +19,7 @@ class CategoiesViewController: BaseViewController<CategoiesViewModel, EmptyDataI
     
     let refreshControl = UIRefreshControl()
     
-    var adapter: UITableViewAdapter<String?, CategoryEntity, String?>!
+    var adapter: UITableViewAdapter<String?, DTO.Category, String?>!
     
     deinit {
         adapter?.observableDataSource = nil
@@ -75,4 +75,30 @@ extension CategoiesViewController: UITableViewDelegate {
             animated: true
         )
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+            self.viewModel.delete(indexPath: indexPath)
+            completion(true)
+        }
+        delete.backgroundColor = .systemRed
+        
+        let change = UIContextualAction(style: .destructive, title: "Chnage") { (action, view, completion) in
+            let entity = self.viewModel.categories.array[indexPath.row]
+            self.navigationController?.pushViewController(
+                AddCategoryViewController.initWith(
+                    AddCategoryDataInitViewController(category: entity)
+                ),
+                animated: true
+            )
+            completion(true)
+        }
+        change.backgroundColor = .systemOrange
+     
+        let config = UISwipeActionsConfiguration(actions: [delete, change])
+        config.performsFirstActionWithFullSwipe = true
+     
+        return config
+    }
 }
+

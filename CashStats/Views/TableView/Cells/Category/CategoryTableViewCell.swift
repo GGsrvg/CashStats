@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import DB
+import DTO
 
 class CategoryTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
@@ -20,19 +20,20 @@ class CategoryTableViewCell: UITableViewCell {
     
     @IBOutlet weak var rangeLabel: UILabel!
     
-    weak var model: CategoryEntity? { didSet {
+    var model: DTO.Category? { didSet {
         guard let model = model else { return }
         
         titleLabel.text = model.name
-        periodLabel.text = model.periodType
+        periodLabel.text = "\(model.periodType ?? .month)"
         
-        rangeLabel.text = "\(model.spentFunds ?? 0) / \(model.fundsLimit ?? 0) $"
+        rangeLabel.text = "\(model.spentFunds) / \(model.fundsLimit) $"
         
-        let intSpentFunds = UInt(truncating: model.spentFunds ?? 0)
-        let intFundsLimit = UInt(truncating: model.fundsLimit ?? 0)
+        let intSpentFunds = UInt(model.spentFunds)
+        let intFundsLimit = UInt(model.fundsLimit)
         
+        let color = UIColor(rgb: model.colorHEX)
         diagramSausage.addItem(.init(
-            color: UIColor(rgb: Int(model.colorHEX)),
+            color: color,
             numberVotes: intSpentFunds
         ))
         diagramSausage.addItem(.init(

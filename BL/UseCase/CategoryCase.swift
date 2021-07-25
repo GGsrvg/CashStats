@@ -6,17 +6,14 @@
 //
 
 import Combine
-import CoreData
-import DB
+import DTO
+//import DB
 
 public class CategoryCase {
-    public func get(predicate: NSPredicate? = nil) -> AnyPublisher<[CategoryEntity], Error> {
-        return Deferred { Future<[CategoryEntity], Error> { promise in
+    public func get(predicate: NSPredicate? = nil) -> AnyPublisher<[DTO.Category], Error> {
+        return Deferred { Future<[DTO.Category], Error> { promise in
             do {
-                let models = try BL.current.db.fetch(
-                    type: CategoryEntity.self,
-                    predicate: predicate
-                )
+                let models = try BL.current.db.category.fetch()
                 promise(.success(models))
             } catch {
                 promise(.failure(error))
@@ -24,34 +21,22 @@ public class CategoryCase {
         } }.eraseToAnyPublisher()
     }
     
-    public func add(models: [CategoryEntity]) -> AnyPublisher<Void, Error> {
-        return Deferred { Future<Void, Error> { promise in
+    public func save(model: DTO.Category) -> AnyPublisher<DTO.Category, Error> {
+        return Deferred { Future<DTO.Category, Error> { promise in
             do {
-                models.forEach { BL.current.db.context.insert($0) }
-                try BL.current.db.save()
-                promise(.success(()))
+                let savedCategory = try BL.current.db.category.save(category: model)
+                promise(.success((savedCategory)))
             } catch {
+                print(error)
                 promise(.failure(error))
             }
         } }.eraseToAnyPublisher()
     }
-    
-    public func update() -> AnyPublisher<Void, Error> {
+
+    public func delete(model: DTO.Category) -> AnyPublisher<Void, Error> {
         return Deferred { Future<Void, Error> { promise in
             do {
-                try BL.current.db.save()
-                promise(.success(()))
-            } catch {
-                promise(.failure(error))
-            }
-        } }.eraseToAnyPublisher()
-    }
-    
-    public func delete(models: [CategoryEntity]) -> AnyPublisher<Void, Error> {
-        return Deferred { Future<Void, Error> { promise in
-            do {
-                models.forEach { BL.current.db.context.delete($0) }
-                try BL.current.db.save()
+                try BL.current.db.category.delete(category: model)
                 promise(.success(()))
             } catch {
                 promise(.failure(error))
