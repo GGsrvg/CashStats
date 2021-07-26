@@ -9,4 +9,5 @@ import DTO
 
 struct AddConsumptionDataInitViewController: BaseDataInitViewController {
     let category: DTO.Category
+    let consumption: DTO.Consumption?
 }

@@ -10,7 +10,7 @@ import LDS
 
 class ConsumptionListViewModel: BaseViewModel {
     
-    let сonsumptions: ObservableDataSourceTwoDimension<String, DTO.Category, String?> = .init()
+    let сonsumptions: ObservableDataSourceTwoDimension<String, DTO.Consumption, String?> = .init()
     
     let category: DTO.Category
     
@@ -25,23 +25,23 @@ class ConsumptionListViewModel: BaseViewModel {
     }
     
     func load() {
-//        self.bl.consumption.get(category: self.category)
-//            .subscribe(on: DispatchQueue.global())
-//            .receive(on: DispatchQueue.main)
-//            .sink { fail in
-//                switch fail {
-//                case .finished:
-//                    print("finished")
-//                case .failure(let error):
-//                    print(error)
-//                }
-//            } receiveValue: { value in
-//                self.сonsumptions.set([
-//                    .init(header: "",
-//                          rows: value,
-//                          footer: ""
-//                    )
-//                ])
-//            }.store(in: &bag)
+        self.bl.consumption.get(by: self.category)
+            .subscribe(on: DispatchQueue.global())
+            .receive(on: DispatchQueue.main)
+            .sink { fail in
+                switch fail {
+                case .finished:
+                    print("finished")
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { value in
+                self.сonsumptions.set([
+                    .init(header: "",
+                          rows: value,
+                          footer: ""
+                    )
+                ])
+            }.store(in: &bag)
     }
 }

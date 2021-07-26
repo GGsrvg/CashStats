@@ -25,6 +25,10 @@ final public class CategoryCase: Case {
         }
     }
     
+//    public func observe() {
+//        let observation = ValueObservation.tracking(DTO.Category.fetchAll)
+//    }
+    
     public func fetch() throws -> [DTO.Category] {
         return try dbQueue.read { db in
             try DTO.Category.fetchAll(db)

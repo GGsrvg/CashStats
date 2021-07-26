@@ -14,10 +14,13 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
     override class func initWith(_ data: ConsumptionListDataInitViewController?) -> Self {
         guard let data = data else { fatalError("data need set") }
         
-        return ConsumptionListViewController(viewModel: ConsumptionListViewModel(category: data.category)) as! Self
+        let vm = ConsumptionListViewModel(category: data.category)
+        let vc = ConsumptionListViewController(viewModel: vm)
+        vc.navigationItem.title = data.category.name
+        return vc as! Self
     }
     
-    var adapter: UITableViewAdapter<String, DTO.Category, String?>!
+    var adapter: UITableViewAdapter<String, DTO.Consumption, String?>!
     
     let refreshControl = UIRefreshControl()
     
@@ -30,13 +33,13 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Consumptions"
         navigationItem.rightBarButtonItems = [
             .init(systemItem: .add, primaryAction: .init() { action in
                 self.navigationController?.pushViewController(
                     AddConsumptionViewController.initWith(
                         AddConsumptionDataInitViewController(
-                            category: self.viewModel.category
+                            category: self.viewModel.category,
+                            consumption: nil
                         )
                     ),
                     animated: true

@@ -21,7 +21,6 @@
 		5B18298B26922ECD0011ABA2 /* SegmentControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B18298926922ECD0011ABA2 /* SegmentControlTableViewCell.xib */; };
 		5B18298D26922ED50011ABA2 /* SegmentControlPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B18298C26922ED50011ABA2 /* SegmentControlPresenter.swift */; };
 		5B1829912692CD3E0011ABA2 /* AddCategoryContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1829902692CD3E0011ABA2 /* AddCategoryContentType.swift */; };
-		5B1A64D7268E1F5200CA07D3 /* ConsumptionPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1A64D6268E1F5200CA07D3 /* ConsumptionPresenter.swift */; };
 		5B1A64DA268E2AD600CA07D3 /* AddCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1A64D8268E2AD600CA07D3 /* AddCategoryViewController.swift */; };
 		5B1A64DB268E2AD600CA07D3 /* AddCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B1A64D9268E2AD600CA07D3 /* AddCategoryViewController.xib */; };
 		5B1A64DD268E2AEB00CA07D3 /* AddCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1A64DC268E2AEB00CA07D3 /* AddCategoryViewModel.swift */; };
@@ -47,6 +46,7 @@
 		5B243B46268776F900AB880D /* DB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5B243B29268776CC00AB880D /* DB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5B243B5A26877E8800AB880D /* BL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B243B5926877E8800AB880D /* BL.swift */; };
 		5B335DC326AD960700E6C0EE /* AddCategoryDataInitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B335DC226AD960700E6C0EE /* AddCategoryDataInitViewController.swift */; };
+		5B42401926ADDB260067C7FD /* ConsumptionCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42401826ADDB260067C7FD /* ConsumptionCase.swift */; };
 		5B48E38F269372690069F1E5 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B48E38D269372690069F1E5 /* ButtonTableViewCell.swift */; };
 		5B48E390269372690069F1E5 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B48E38E269372690069F1E5 /* ButtonTableViewCell.xib */; };
 		5B48E392269372780069F1E5 /* ButtonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B48E391269372780069F1E5 /* ButtonPresenter.swift */; };
@@ -86,7 +86,6 @@
 		5BCF2B39268AE26600A90FCB /* DiagramItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF2B38268AE26600A90FCB /* DiagramItem.swift */; };
 		5BCF2B3E268B720800A90FCB /* CategoiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF2B3C268B720800A90FCB /* CategoiesViewController.swift */; };
 		5BCF2B3F268B720800A90FCB /* CategoiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF2B3D268B720800A90FCB /* CategoiesViewController.xib */; };
-		5BCF2B41268B777400A90FCB /* CategoryTableViewCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF2B40268B777400A90FCB /* CategoryTableViewCellPresenter.swift */; };
 		5BCF2B43268B783D00A90FCB /* CategoiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF2B42268B783D00A90FCB /* CategoiesViewModel.swift */; };
 		5BE1352E26A2A94100125063 /* DatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1352D26A2A94100125063 /* DatePresenter.swift */; };
 		5BF623A026A9D59900701E33 /* BL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B243B07268776B900AB880D /* BL.framework */; };
@@ -232,7 +231,6 @@
 		5B18298926922ECD0011ABA2 /* SegmentControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentControlTableViewCell.xib; sourceTree = "<group>"; };
 		5B18298C26922ED50011ABA2 /* SegmentControlPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControlPresenter.swift; sourceTree = "<group>"; };
 		5B1829902692CD3E0011ABA2 /* AddCategoryContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryContentType.swift; sourceTree = "<group>"; };
-		5B1A64D6268E1F5200CA07D3 /* ConsumptionPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionPresenter.swift; sourceTree = "<group>"; };
 		5B1A64D8268E2AD600CA07D3 /* AddCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewController.swift; sourceTree = "<group>"; };
 		5B1A64D9268E2AD600CA07D3 /* AddCategoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCategoryViewController.xib; sourceTree = "<group>"; };
 		5B1A64DC268E2AEB00CA07D3 /* AddCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryViewModel.swift; sourceTree = "<group>"; };
@@ -262,6 +260,7 @@
 		5B243B2C268776CC00AB880D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B243B5926877E8800AB880D /* BL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BL.swift; sourceTree = "<group>"; };
 		5B335DC226AD960700E6C0EE /* AddCategoryDataInitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryDataInitViewController.swift; sourceTree = "<group>"; };
+		5B42401826ADDB260067C7FD /* ConsumptionCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionCase.swift; sourceTree = "<group>"; };
 		5B48E38D269372690069F1E5 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		5B48E38E269372690069F1E5 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
 		5B48E391269372780069F1E5 /* ButtonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPresenter.swift; sourceTree = "<group>"; };
@@ -291,7 +290,6 @@
 		5BCF2B38268AE26600A90FCB /* DiagramItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramItem.swift; sourceTree = "<group>"; };
 		5BCF2B3C268B720800A90FCB /* CategoiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoiesViewController.swift; sourceTree = "<group>"; };
 		5BCF2B3D268B720800A90FCB /* CategoiesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoiesViewController.xib; sourceTree = "<group>"; };
-		5BCF2B40268B777400A90FCB /* CategoryTableViewCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCellPresenter.swift; sourceTree = "<group>"; };
 		5BCF2B42268B783D00A90FCB /* CategoiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoiesViewModel.swift; sourceTree = "<group>"; };
 		5BE1352D26A2A94100125063 /* DatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePresenter.swift; sourceTree = "<group>"; };
 		5BFFC120268F599B00235D3B /* DataBaseStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseStack.swift; sourceTree = "<group>"; };
@@ -412,7 +410,6 @@
 		5B1497D926886C4300777AF3 /* Consumption */ = {
 			isa = PBXGroup;
 			children = (
-				5B1A64D6268E1F5200CA07D3 /* ConsumptionPresenter.swift */,
 				5B1497DA26886C5F00777AF3 /* ConsumptionTableViewCell.swift */,
 				5B1497DB26886C5F00777AF3 /* ConsumptionTableViewCell.xib */,
 			);
@@ -668,6 +665,7 @@
 			children = (
 				5BB2061626AB222B00DAA5FD /* Case.swift */,
 				5BB2061426AB21DE00DAA5FD /* CategoryCase.swift */,
+				5B42401826ADDB260067C7FD /* ConsumptionCase.swift */,
 			);
 			path = Case;
 			sourceTree = "<group>";
@@ -735,7 +733,6 @@
 		5BCF2B2F268AD9D200A90FCB /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				5BCF2B40268B777400A90FCB /* CategoryTableViewCellPresenter.swift */,
 				5BCF2B30268AD9DD00A90FCB /* CategoryTableViewCell.swift */,
 				5BCF2B31268AD9DD00A90FCB /* CategoryTableViewCell.xib */,
 			);
@@ -1175,7 +1172,6 @@
 				5B1A64E0268E30BA00CA07D3 /* TextFieldPresenter.swift in Sources */,
 				5B48E392269372780069F1E5 /* ButtonPresenter.swift in Sources */,
 				5B1497D3268869CF00777AF3 /* ConsumptionListViewController.swift in Sources */,
-				5B1A64D7268E1F5200CA07D3 /* ConsumptionPresenter.swift in Sources */,
 				5B5EBC4E268D7667004AD7C1 /* ConsumptionListViewModel.swift in Sources */,
 				5B8EE70A269774EE00383873 /* ColorWellPresenter.swift in Sources */,
 				5B1A64E3268E30CE00CA07D3 /* TextFieldTableViewCell.swift in Sources */,
@@ -1188,7 +1184,6 @@
 				5BCF2B43268B783D00A90FCB /* CategoiesViewModel.swift in Sources */,
 				5B335DC326AD960700E6C0EE /* AddCategoryDataInitViewController.swift in Sources */,
 				5B243AEF268775E000AB880D /* Consts.swift in Sources */,
-				5BCF2B41268B777400A90FCB /* CategoryTableViewCellPresenter.swift in Sources */,
 				5B1A64DA268E2AD600CA07D3 /* AddCategoryViewController.swift in Sources */,
 				5BCF2B32268AD9DD00A90FCB /* CategoryTableViewCell.swift in Sources */,
 				5B48E38F269372690069F1E5 /* ButtonTableViewCell.swift in Sources */,
@@ -1235,6 +1230,7 @@
 			files = (
 				5BFFC121268F599B00235D3B /* DataBaseStack.swift in Sources */,
 				5BB2061726AB222B00DAA5FD /* Case.swift in Sources */,
+				5B42401926ADDB260067C7FD /* ConsumptionCase.swift in Sources */,
 				5BB2061026AB1FB400DAA5FD /* Consumption.swift in Sources */,
 				5BFFC124268F59E500235D3B /* DataBase.swift in Sources */,
 				5BB2060E26AB1E3E00DAA5FD /* Category.swift in Sources */,

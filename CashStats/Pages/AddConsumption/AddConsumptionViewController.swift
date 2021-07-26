@@ -13,7 +13,10 @@ class AddConsumptionViewController: BaseViewController<AddConsumptionViewModel, 
     override class func initWith(_ data: AddConsumptionDataInitViewController?) -> Self {
         guard let data = data else { fatalError("need set data") }
         
-        return AddConsumptionViewController(viewModel: AddConsumptionViewModel(category: data.category)) as! Self
+        let vm = AddConsumptionViewModel(category: data.category)
+        vm.consumption = data.consumption
+        let vc = AddConsumptionViewController(viewModel: vm)
+        return vc as! Self
     }
     
     var adapter: UITableViewAdapter<String?, AddConsumptionContentType, String?>!

@@ -15,7 +15,6 @@ class CategoiesViewModel: BaseViewModel {
     
     required init() {
         super.init()
-        
         self.load()
     }
     

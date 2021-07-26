@@ -6,68 +6,40 @@
 //
 
 import Combine
-import DB
+import DTO
 
 public class ConsumptionCase {
-//    public func get(category: CategoryEntity, predicate: NSPredicate? = nil) -> AnyPublisher<[ConsumptionEntity], Error> {
-//        return Deferred { Future<[ConsumptionEntity], Error> { promise in
-//            do {
-//                var subPredicates = [
-//                    NSPredicate(format: "%K = %@", #keyPath(ConsumptionEntity.category), category)
-//                ]
-//                
-//                if let predicate = predicate {
-//                    subPredicates.append(predicate)
-//                }
-//                
-//                let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: subPredicates)
-//                
-//                let models = try BL.current.db.fetch(
-//                    type: ConsumptionEntity.self,
-//                    predicate: compoundPredicate
-//                )
-//                promise(.success(models))
-//            } catch {
-//                promise(.failure(error))
-//            }
-//        } }.eraseToAnyPublisher()
-//    }
-//    
-//    public func add(models: [ConsumptionEntity], to category: CategoryEntity) -> AnyPublisher<Void, Error> {
-//        return Deferred { Future<Void, Error> { promise in
-//            do {
-//                models.forEach {
-//                    BL.current.db.context.insert($0)
-//                    category.addToConsumptions($0)
-//                }
-//                try BL.current.db.save()
-//                promise(.success(()))
-//            } catch {
-//                promise(.failure(error))
-//            }
-//        } }.eraseToAnyPublisher()
-//    }
-//    
-//    public func update() -> AnyPublisher<Void, Error> {
-//        return Deferred { Future<Void, Error> { promise in
-//            do {
-//                try BL.current.db.save()
-//                promise(.success(()))
-//            } catch {
-//                promise(.failure(error))
-//            }
-//        } }.eraseToAnyPublisher()
-//    }
-//    
-//    public func delete(models: [ConsumptionEntity]) -> AnyPublisher<Void, Error> {
-//        return Deferred { Future<Void, Error> { promise in
-//            do {
-//                models.forEach { BL.current.db.context.delete($0) }
-//                try BL.current.db.save()
-//                promise(.success(()))
-//            } catch {
-//                promise(.failure(error))
-//            }
-//        } }.eraseToAnyPublisher()
-//    }
+    public func get(by category: DTO.Category, predicate: NSPredicate? = nil) -> AnyPublisher<[DTO.Consumption], Error> {
+        return Deferred { Future<[DTO.Consumption], Error> { promise in
+            do {
+                let models = try BL.current.db.consumption.fetch(by: category)
+                promise(.success(models))
+            } catch {
+                promise(.failure(error))
+            }
+        } }.eraseToAnyPublisher()
+    }
+    
+    public func save(model: DTO.Consumption) -> AnyPublisher<DTO.Consumption, Error> {
+        return Deferred { Future<DTO.Consumption, Error> { promise in
+            do {
+                let savedCategory = try BL.current.db.consumption.save(consumption: model)
+                promise(.success((savedCategory)))
+            } catch {
+                print(error)
+                promise(.failure(error))
+            }
+        } }.eraseToAnyPublisher()
+    }
+
+    public func delete(model: DTO.Consumption) -> AnyPublisher<Void, Error> {
+        return Deferred { Future<Void, Error> { promise in
+            do {
+                try BL.current.db.consumption.delete(consumption: model)
+                promise(.success(()))
+            } catch {
+                promise(.failure(error))
+            }
+        } }.eraseToAnyPublisher()
+    }
 }
