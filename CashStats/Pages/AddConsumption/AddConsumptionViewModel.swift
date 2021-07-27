@@ -15,15 +15,15 @@ class AddConsumptionViewModel: BaseViewModel {
     var consumption: DTO.Consumption?
     
     private let name = TextFieldPresenter(
-        title: "name",
-        placeholder: "01.01.2020",
+        title: "Title",
+        placeholder: "Name of consumption",
         value: nil,
         keyboardType: .default
     )
     
     private let price = TextFieldPresenter(
-        title: "price",
-        placeholder: "300",
+        title: "Price",
+        placeholder: "Product price",
         value: nil,
         keyboardType: .decimalPad
     )
@@ -62,11 +62,6 @@ class AddConsumptionViewModel: BaseViewModel {
             name: name,
             price: price
         )
-//            ConsumptionEntity(entity: .entity(forEntityName: "ConsumptionEntity", in: bl.db.context)!, insertInto: nil)
-//        consumption.name = name
-//        consumption.price = NSDecimalNumber(decimal: price)
-//        consumption.date = date
-        
         
         self.bl.consumption.save(model: consumption)
 //            .add(models: [.init(id: "", date: date, name: name, price: price * -1)], to: category)

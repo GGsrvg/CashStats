@@ -48,10 +48,10 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
         ]
         
         adapter = .init(tableView)
-        adapter.observableDataSource = viewModel.сonsumptions
+        adapter.observableDataSource = viewModel.consumptions
         adapter.titleForHeaderSectionHandler = { [weak self] tableView, section in
             guard let self = self else { return nil }
-            return self.viewModel.сonsumptions.array[section].header
+            return self.viewModel.consumptions.array[section].header
         }
         adapter.cellForRowHandler = { tableView, indexPath, model in
             let cell = tableView.dequeueReusableCell(withIdentifier: ConsumptionTableViewCell.reuseIdentifier, for: indexPath)
@@ -65,10 +65,18 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
         }
         tableView.register(fromNib: ConsumptionTableViewCell.self)
         tableView.dataSource = adapter
+        tableView.delegate = self
         
         refreshControl.addAction(.init(handler: { _ in
             self.viewModel.load()
         }), for: .valueChanged)
         tableView.refreshControl = refreshControl
+    }
+}
+
+extension ConsumptionListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let position = indexPath.row + 1 + 40
+        self.viewModel.load(from: position)
     }
 }

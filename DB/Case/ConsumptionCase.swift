@@ -19,12 +19,22 @@ final public class ConsumptionCase: Case {
                     t.column("price", .double).notNull()
                 }
             }
+            
+            // FOR TEST
+//            for i in 0...1000 {
+//                var consumption = DTO.Consumption(id: nil, categoryId: 1, date: Date(), name: "Test #\(i)", price: 1000)
+//                try consumption.save(db)
+//            }
         }
     }
     
-    public func fetch(by category: DTO.Category) throws -> [DTO.Consumption] {
+    public func fetch(by category: DTO.Category, from position: Int, count: Int) throws -> [DTO.Consumption] {
         return try dbQueue.read { db in
-            try DTO.Consumption.fetchAll(db).filter { $0.categoryId == category.id }
+            try DTO.Consumption
+                .order(Column.rowID.desc)
+//                .filter(Column("categoryId") == category.id)
+                .limit(count, offset: position)
+                .fetchAll(db)
         }
     }
     

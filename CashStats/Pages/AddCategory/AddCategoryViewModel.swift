@@ -15,15 +15,15 @@ class AddCategoryViewModel: BaseViewModel {
     let fields: ObservableDataSourceOneDimension<AddCategoryContentType> = .init()
     
     lazy var nameTextField: TextFieldPresenter = .init(
-        title: "Name",
-        placeholder: nil,
+        title: "Title",
+        placeholder: "Name of category",
         value: nil,
         keyboardType: .default
     )
     
     lazy var costsLimitTextField: TextFieldPresenter = .init(
         title: "Costs limit",
-        placeholder: nil,
+        placeholder: "Period cost limit",
         value: nil,
         keyboardType: .decimalPad
     )

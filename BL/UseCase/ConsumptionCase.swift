@@ -9,10 +9,11 @@ import Combine
 import DTO
 
 public class ConsumptionCase {
-    public func get(by category: DTO.Category, predicate: NSPredicate? = nil) -> AnyPublisher<[DTO.Consumption], Error> {
+    public func get(by category: DTO.Category, from position: Int, count: Int) -> AnyPublisher<[DTO.Consumption], Error> {
         return Deferred { Future<[DTO.Consumption], Error> { promise in
+            print("Is main thread: \(Thread.isMainThread)")
             do {
-                let models = try BL.current.db.consumption.fetch(by: category)
+                let models = try BL.current.db.consumption.fetch(by: category, from: position, count: count)
                 promise(.success(models))
             } catch {
                 promise(.failure(error))
