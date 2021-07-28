@@ -14,7 +14,7 @@ class ConsumptionListViewModel: BaseViewModel {
     
     let category: DTO.Category
     
-    private var lastPosition = 0
+//    private var lastPosition = 0
     private let countFetch = 100
     
     required init(category: DTO.Category) {
@@ -34,41 +34,39 @@ class ConsumptionListViewModel: BaseViewModel {
         fatalError("init() has not been implemented")
     }
     
-    func load(from position: Int = 0) {
-        guard position % countFetch == 0
+//    func refresh() {
+//        lastPosition = 0
+//        pagingLoad()
+//    }
+    
+//    func pagingLoad() {
+//        load(from: lastPosition + countFetch)
+//    }
+    
+    private var isLoad = false
+    func load(clear: Bool? = false) {
+        guard !isLoad
         else { return }
         
-        // if lastPosition less or equil position and position equail zero
-        // then reset pagination
-        if lastPosition < position {
-            if position == 0 {
-               return
-            }
-            lastPosition = position
-            consumptions.addSections([
-                .init(
-                    header: "",
-                    rows: [],
-                    footer: ""
-                )
-            ])
-        }
+        isLoad = true
         
-        self.bl.consumption.get(by: self.category, from: position, count: countFetch)
+        var beforeCount = 0
+        self.consumptions.array.forEach {
+            beforeCount += $0.rows.count
+        }
+        self.bl.consumption.get(by: self.category, from: beforeCount, count: countFetch)
             .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
             .sink { fail in
                 switch fail {
                 case .finished:
+                    self.isLoad = false
                     print("finished")
                 case .failure(let error):
                     print(error)
                 }
             } receiveValue: { value in
-                self.lastPosition = position + self.countFetch
-                DispatchQueue.main.async {
-                    self.consumptions.addRows(value, section: 0)
-                }
+                self.consumptions.addRows(value, section: 0)
             }.store(in: &bag)
     }
 }

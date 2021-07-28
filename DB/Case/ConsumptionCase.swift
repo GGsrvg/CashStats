@@ -21,10 +21,24 @@ final public class ConsumptionCase: Case {
             }
             
             // FOR TEST
-//            for i in 0...1000 {
-//                var consumption = DTO.Consumption(id: nil, categoryId: 1, date: Date(), name: "Test #\(i)", price: 1000)
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "dd.MM.yyyy"
+//            
+//            for i in 0...400 {
+//                let dateStr = "\((i / 100) + 1).04.2021"
+//                var consumption = DTO.Consumption(id: nil,
+//                                                  categoryId: 1,
+//                                                  date: dateFormatter.date(from: dateStr)!,
+//                                                  name: "Test #\(i)",
+//                                                  price: 1000)
 //                try consumption.save(db)
 //            }
+        }
+    }
+    
+    public func countAll() throws -> Int {
+        return try dbQueue.read { db in
+            try DTO.Consumption.fetchCount(db)
         }
     }
     
@@ -32,7 +46,7 @@ final public class ConsumptionCase: Case {
         return try dbQueue.read { db in
             try DTO.Consumption
                 .order(Column.rowID.desc)
-//                .filter(Column("categoryId") == category.id)
+                .filter(Column("categoryId") == category.id)
                 .limit(count, offset: position)
                 .fetchAll(db)
         }

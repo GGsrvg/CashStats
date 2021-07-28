@@ -68,15 +68,16 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
         tableView.delegate = self
         
         refreshControl.addAction(.init(handler: { _ in
-            self.viewModel.load()
+            self.viewModel.load(clear: true)
         }), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
 }
 
 extension ConsumptionListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let position = indexPath.row + 1 + 40
-        self.viewModel.load(from: position)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (((scrollView.contentOffset.y + scrollView.frame.size.height) > scrollView.contentSize.height )){
+            self.viewModel.load()
+        }
     }
 }
