@@ -9,6 +9,12 @@ import UIKit
 import LDS
 import DTO
 
+fileprivate let dateFormatter: DateFormatter = {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateStyle = .long
+    return dateFormatter
+}()
+
 class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel, ConsumptionListDataInitViewController> {
     
     override class func initWith(_ data: ConsumptionListDataInitViewController?) -> Self {
@@ -20,7 +26,7 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
         return vc as! Self
     }
     
-    var adapter: UITableViewAdapter<String, DTO.Consumption, String?>!
+    var adapter: UITableViewAdapter<Date, DTO.Consumption, String?>!
     
     let refreshControl = UIRefreshControl()
     
@@ -32,7 +38,7 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+//        self.view.index
         navigationItem.rightBarButtonItems = [
             .init(systemItem: .add, primaryAction: .init() { action in
                 self.navigationController?.pushViewController(
@@ -51,7 +57,8 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
         adapter.observableDataSource = viewModel.consumptions
         adapter.titleForHeaderSectionHandler = { [weak self] tableView, section in
             guard let self = self else { return nil }
-            return self.viewModel.consumptions.array[section].header
+            let date = self.viewModel.consumptions.array[section].header
+            return dateFormatter.string(from: date)
         }
         adapter.cellForRowHandler = { tableView, indexPath, model in
             let cell = tableView.dequeueReusableCell(withIdentifier: ConsumptionTableViewCell.reuseIdentifier, for: indexPath)
@@ -60,17 +67,17 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
             }
             return cell
         }
-        adapter.numberOfSectionsHandler = { _, _ in
-            self.refreshControl.endRefreshing()
-        }
+//        adapter.numberOfSectionsHandler = { _, _ in
+//            self.refreshControl.endRefreshing()
+//        }
         tableView.register(fromNib: ConsumptionTableViewCell.self)
         tableView.dataSource = adapter
         tableView.delegate = self
         
-        refreshControl.addAction(.init(handler: { _ in
-            self.viewModel.load(clear: true)
-        }), for: .valueChanged)
-        tableView.refreshControl = refreshControl
+//        refreshControl.addAction(.init(handler: { _ in
+//            self.viewModel.load(clear: true)
+//        }), for: .valueChanged)
+//        tableView.refreshControl = refreshControl
     }
 }
 

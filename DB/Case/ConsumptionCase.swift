@@ -14,7 +14,7 @@ final public class ConsumptionCase: Case {
             if try db.tableExists(DTO.Consumption.databaseTableName) == false {
                 try db.create(table: DTO.Consumption.databaseTableName) { t in
                     t.column("categoryId", .integer).notNull()
-                    t.column("date", .date).notNull()
+                    t.column("date", .datetime).notNull()
                     t.column("name", .text).notNull()
                     t.column("price", .double).notNull()
                 }
@@ -23,14 +23,20 @@ final public class ConsumptionCase: Case {
             // FOR TEST
 //            let dateFormatter = DateFormatter()
 //            dateFormatter.dateFormat = "dd.MM.yyyy"
-//            
+//            var day = 1
 //            for i in 0...400 {
-//                let dateStr = "\((i / 100) + 1).04.2021"
-//                var consumption = DTO.Consumption(id: nil,
-//                                                  categoryId: 1,
-//                                                  date: dateFormatter.date(from: dateStr)!,
-//                                                  name: "Test #\(i)",
-//                                                  price: 1000)
+//                let dateStr = "\(day).04.2021"
+//                var consumption = DTO.Consumption(
+//                    id: nil,
+//                    categoryId: 1,
+//                    date: dateFormatter.date(from: dateStr)!,
+//                    name: "Test #\(i)",
+//                    price: 1000
+//                )
+//                day += 1
+//                if day % 5 == 0 {
+//                    day = 1
+//                }
 //                try consumption.save(db)
 //            }
         }

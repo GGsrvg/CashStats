@@ -10,7 +10,8 @@ import DTO
 
 fileprivate let dateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd.MM.yyyy"
+    dateFormatter.dateStyle = .long
+    dateFormatter.timeStyle = .short
     return dateFormatter
 }()
 
