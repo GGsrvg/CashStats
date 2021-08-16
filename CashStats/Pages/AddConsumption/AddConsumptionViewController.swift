@@ -32,7 +32,7 @@ class AddConsumptionViewController: BaseViewController<AddConsumptionViewModel, 
         
         navigationItem.title = "Add Consumption"
         navigationItem.rightBarButtonItems = [
-            .init(systemItem: .add, primaryAction: .init(handler: { action in
+            .init(systemItem: .save, primaryAction: .init(handler: { action in
                 self.viewModel.save()
             }))
         ]

@@ -12,9 +12,9 @@ import BL
 class BaseViewModel: NSObject {
     var bag = Set<AnyCancellable>()
     
-    let coordinator = Consts.coordinator
+    let coordinator = DI.coordinator
     
-    var bl: BL = Consts.bisnesLayer
+    var bl: BL = DI.bisnesLayer
     
     required override init() {
         

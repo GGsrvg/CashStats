@@ -17,4 +17,13 @@ public class BL {
     public let consumption: ConsumptionCase = .init()
     
     init() { }
+    
+    func calculateConsumption() {
+        /*
+         получить траты за месяц
+         разбить на катягории
+         в каждрой категории сумировать суммы трат
+         записать 
+         */
+    }
 }

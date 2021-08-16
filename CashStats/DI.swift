@@ -1,5 +1,5 @@
 //
-//  DataBinding.swift
+//  DI.swift
 //  CashStats
 //
 //  Created by GGsrvg on 26.06.2021.
@@ -8,7 +8,7 @@
 import Foundation
 import BL
 
-class Consts {
+class DI {
     static let coordinator = Coordinator()
     static let bisnesLayer: BL = BL.current
 }

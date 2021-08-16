@@ -36,7 +36,7 @@
 		5B243A46268769DB00AB880D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B243A44268769DB00AB880D /* LaunchScreen.storyboard */; };
 		5B243AEB2687759F00AB880D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B243AEA2687759F00AB880D /* BaseViewController.swift */; };
 		5B243AED268775AB00AB880D /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B243AEC268775AB00AB880D /* BaseViewModel.swift */; };
-		5B243AEF268775E000AB880D /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B243AEE268775E000AB880D /* Consts.swift */; };
+		5B243AEF268775E000AB880D /* DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B243AEE268775E000AB880D /* DI.swift */; };
 		5B243B0B268776B900AB880D /* BL.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B243B09268776B900AB880D /* BL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B243B1C268776C400AB880D /* Net.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B243B1A268776C400AB880D /* Net.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B243B2D268776CC00AB880D /* DB.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B243B2B268776CC00AB880D /* DB.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,6 +52,7 @@
 		5B48E392269372780069F1E5 /* ButtonPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B48E391269372780069F1E5 /* ButtonPresenter.swift */; };
 		5B48E396269376D40069F1E5 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B48E395269376D40069F1E5 /* Button.swift */; };
 		5B500C0F2694D005005765D5 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B500C0E2694D005005765D5 /* Coordinator.swift */; };
+		5B521C2826BB0956009D5B63 /* ListContentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B521C2726BB0956009D5B63 /* ListContentState.swift */; };
 		5B5EBC4E268D7667004AD7C1 /* ConsumptionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5EBC4D268D7667004AD7C1 /* ConsumptionListViewModel.swift */; };
 		5B8EE7082697532100383873 /* ColorWellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EE7072697532100383873 /* ColorWellTableViewCell.swift */; };
 		5B8EE70A269774EE00383873 /* ColorWellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8EE709269774EE00383873 /* ColorWellPresenter.swift */; };
@@ -72,6 +73,7 @@
 		5BB2061026AB1FB400DAA5FD /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2060F26AB1FB400DAA5FD /* Consumption.swift */; };
 		5BB2061526AB21DE00DAA5FD /* CategoryCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2061426AB21DE00DAA5FD /* CategoryCase.swift */; };
 		5BB2061726AB222B00DAA5FD /* Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2061626AB222B00DAA5FD /* Case.swift */; };
+		5BC3212D26C445D3007A2BA4 /* UITableView+ListContentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC3212C26C445D3007A2BA4 /* UITableView+ListContentState.swift */; };
 		5BC68B44269E002600C572A1 /* AddConsumptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC68B42269E002600C572A1 /* AddConsumptionViewController.swift */; };
 		5BC68B45269E002600C572A1 /* AddConsumptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BC68B43269E002600C572A1 /* AddConsumptionViewController.xib */; };
 		5BC68B47269E003100C572A1 /* AddConsumptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC68B46269E003100C572A1 /* AddConsumptionViewModel.swift */; };
@@ -248,7 +250,7 @@
 		5B243A47268769DB00AB880D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B243AEA2687759F00AB880D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		5B243AEC268775AB00AB880D /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
-		5B243AEE268775E000AB880D /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
+		5B243AEE268775E000AB880D /* DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DI.swift; sourceTree = "<group>"; };
 		5B243B07268776B900AB880D /* BL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B243B09268776B900AB880D /* BL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BL.h; sourceTree = "<group>"; };
 		5B243B0A268776B900AB880D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 		5B48E391269372780069F1E5 /* ButtonPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPresenter.swift; sourceTree = "<group>"; };
 		5B48E395269376D40069F1E5 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		5B500C0E2694D005005765D5 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		5B521C2726BB0956009D5B63 /* ListContentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListContentState.swift; sourceTree = "<group>"; };
 		5B5EBC4D268D7667004AD7C1 /* ConsumptionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumptionListViewModel.swift; sourceTree = "<group>"; };
 		5B8EE7072697532100383873 /* ColorWellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWellTableViewCell.swift; sourceTree = "<group>"; };
 		5B8EE709269774EE00383873 /* ColorWellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWellPresenter.swift; sourceTree = "<group>"; };
@@ -274,6 +277,7 @@
 		5BB2060F26AB1FB400DAA5FD /* Consumption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
 		5BB2061426AB21DE00DAA5FD /* CategoryCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCase.swift; sourceTree = "<group>"; };
 		5BB2061626AB222B00DAA5FD /* Case.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Case.swift; sourceTree = "<group>"; };
+		5BC3212C26C445D3007A2BA4 /* UITableView+ListContentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ListContentState.swift"; sourceTree = "<group>"; };
 		5BC68B42269E002600C572A1 /* AddConsumptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConsumptionViewController.swift; sourceTree = "<group>"; };
 		5BC68B43269E002600C572A1 /* AddConsumptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddConsumptionViewController.xib; sourceTree = "<group>"; };
 		5BC68B46269E003100C572A1 /* AddConsumptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConsumptionViewModel.swift; sourceTree = "<group>"; };
@@ -392,12 +396,12 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		5B1497D726886C3600777AF3 /* UICollectionView */ = {
+		5B1497D726886C3600777AF3 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				5B1497D826886C3E00777AF3 /* Cells */,
 			);
-			path = UICollectionView;
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		5B1497D826886C3E00777AF3 /* Cells */ = {
@@ -479,7 +483,7 @@
 				5B243ADD2687752C00AB880D /* Pages */,
 				5B243A39268769DA00AB880D /* AppDelegate.swift */,
 				5B243A3B268769DA00AB880D /* SceneDelegate.swift */,
-				5B243AEE268775E000AB880D /* Consts.swift */,
+				5B243AEE268775E000AB880D /* DI.swift */,
 				5B243A3D268769DA00AB880D /* ViewController.swift */,
 				5B243A42268769DB00AB880D /* Assets.xcassets */,
 				5B243A44268769DB00AB880D /* LaunchScreen.storyboard */,
@@ -503,9 +507,10 @@
 		5B243ADE2687753500AB880D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5B47B06C26C1903900EC244D /* ListContentState */,
 				5B48E393269376BC0069F1E5 /* Extension */,
 				5BCF2B34268AE22000A90FCB /* Diagram */,
-				5B1497D726886C3600777AF3 /* UICollectionView */,
+				5B1497D726886C3600777AF3 /* CollectionView */,
 				5B1497D526886C2000777AF3 /* TableView */,
 			);
 			path = Views;
@@ -606,6 +611,15 @@
 			children = (
 			);
 			path = Request;
+			sourceTree = "<group>";
+		};
+		5B47B06C26C1903900EC244D /* ListContentState */ = {
+			isa = PBXGroup;
+			children = (
+				5B521C2726BB0956009D5B63 /* ListContentState.swift */,
+				5BC3212C26C445D3007A2BA4 /* UITableView+ListContentState.swift */,
+			);
+			path = ListContentState;
 			sourceTree = "<group>";
 		};
 		5B48E38C269371B00069F1E5 /* Button */ = {
@@ -1179,17 +1193,19 @@
 				5B48E396269376D40069F1E5 /* Button.swift in Sources */,
 				5B18298A26922ECD0011ABA2 /* SegmentControlTableViewCell.swift in Sources */,
 				5B1A64DD268E2AEB00CA07D3 /* AddCategoryViewModel.swift in Sources */,
+				5BC3212D26C445D3007A2BA4 /* UITableView+ListContentState.swift in Sources */,
 				5BC68B49269E015C00C572A1 /* AddConsumptionContentType.swift in Sources */,
 				5B243A3E268769DA00AB880D /* ViewController.swift in Sources */,
 				5BCF2B43268B783D00A90FCB /* CategoiesViewModel.swift in Sources */,
 				5B335DC326AD960700E6C0EE /* AddCategoryDataInitViewController.swift in Sources */,
-				5B243AEF268775E000AB880D /* Consts.swift in Sources */,
+				5B243AEF268775E000AB880D /* DI.swift in Sources */,
 				5B1A64DA268E2AD600CA07D3 /* AddCategoryViewController.swift in Sources */,
 				5BCF2B32268AD9DD00A90FCB /* CategoryTableViewCell.swift in Sources */,
 				5B48E38F269372690069F1E5 /* ButtonTableViewCell.swift in Sources */,
 				5BE1352E26A2A94100125063 /* DatePresenter.swift in Sources */,
 				5B500C0F2694D005005765D5 /* Coordinator.swift in Sources */,
 				5B1497DC26886C5F00777AF3 /* ConsumptionTableViewCell.swift in Sources */,
+				5B521C2826BB0956009D5B63 /* ListContentState.swift in Sources */,
 				5BC68B47269E003100C572A1 /* AddConsumptionViewModel.swift in Sources */,
 				5BC68B44269E002600C572A1 /* AddConsumptionViewController.swift in Sources */,
 				5B0F702A26A7343900ACBFDD /* AddConsumptionDataInitViewController.swift in Sources */,

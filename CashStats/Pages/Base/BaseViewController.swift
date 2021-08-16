@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol BaseDataInitViewController {
     
@@ -24,6 +25,8 @@ class BaseViewController<VM: BaseViewModel, DI: BaseDataInitViewController>: UIV
     }
     
     let viewModel: VM
+    
+    var bag = Set<AnyCancellable>()
     
     init(viewModel: VM) {
         self.viewModel = viewModel

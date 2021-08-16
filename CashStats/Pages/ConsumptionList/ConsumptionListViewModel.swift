@@ -14,34 +14,43 @@ class ConsumptionListViewModel: BaseViewModel {
     
     let category: DTO.Category
     
-//    private var lastPosition = 0
-    private let countFetch = 100
+    @Published
+    var contentState: ListContentState.TypeState = .content
+    
+    private var isFirstLoad = true
+    
+    private var isLoad = false
+    
+    private let countFetch = 10
     
     required init(category: DTO.Category) {
         self.category = category
         super.init()
-        self.load()
     }
     
     required init() {
         fatalError("init() has not been implemented")
     }
     
-    private var isLoad = false
     func load(clear: Bool = false) {
         guard !isLoad else { return }
         isLoad = true
         
-        var beforeCount = 0
+        if isFirstLoad {
+            contentState = .load
+            isFirstLoad = false
+        }
+        
+        var fromIndex = 0
         if clear {
             self.consumptions.clear()
         } else {
             self.consumptions.array.forEach {
-                beforeCount += $0.rows.count
+                fromIndex += $0.rows.count
             }
         }
         
-        self.bl.consumption.get(by: self.category, from: beforeCount, count: countFetch)
+        self.bl.consumption.get(by: self.category, from: fromIndex, count: countFetch)
             .tryCompactMap { (value: [DTO.Consumption]) ->  [Dictionary<Date, [Consumption]>.Element] in
                 var dictionaryConsumption: [Date: [DTO.Consumption]] = [:]
 
@@ -67,25 +76,36 @@ class ConsumptionListViewModel: BaseViewModel {
                 switch fail {
                 case .finished:
                     self.isLoad = false
-                    print("finished")
+                    self.contentState = self.consumptions.array.isEmpty ?
+                        .error(title: "Empty", description: "No consumptions added. Click \"+\" to add.") : .content
                 case .failure(let error):
-                    print(error)
+                    self.isLoad = false
+                    if self.consumptions.array.isEmpty {
+                        self.contentState = .error(
+                            title: "Error",
+                            description: error.localizedDescription
+                        )
+                    }
                 }
             } receiveValue: { sortedConsumption in
+                var sections: [SectionItem<Date, DTO.Consumption, String?>] = []
+                
                 for (key, value) in sortedConsumption {
                     if self.consumptions.array.last?.header == key {
                         let lastSectionIndex = self.consumptions.array.count - 1
                         self.consumptions.addRows(value,
                                                   section: lastSectionIndex)
                     } else {
-                        self.consumptions.addSections([
-                            .init(
-                                header: key,
-                                rows: value,
-                                footer: ""
-                            )
-                        ])
+                        sections.append(.init(
+                            header: key,
+                            rows: value,
+                            footer: ""
+                        ))
                     }
+                }
+                
+                if !sections.isEmpty {
+                    self.consumptions.addSections(sections)
                 }
             }.store(in: &bag)
     }

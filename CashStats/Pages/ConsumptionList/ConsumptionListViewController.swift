@@ -32,13 +32,29 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
     
     @IBOutlet weak var tableView: UITableView!
     
+    let listContentState: ListContentState = {
+        let listContentState = ListContentState()
+        listContentState.translatesAutoresizingMaskIntoConstraints = false
+        return listContentState
+    }()
+    
     deinit {
         adapter?.observableDataSource = nil
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.index
+        self.setNavItem()
+        self.setContentState()
+        self.setTableAdapter()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.viewModel.load()
+    }
+    
+    private func setNavItem() {
         navigationItem.rightBarButtonItems = [
             .init(systemItem: .add, primaryAction: .init() { action in
                 self.navigationController?.pushViewController(
@@ -52,7 +68,31 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
                 )
             }, menu: nil)
         ]
+    }
+    
+    private func setContentState() {
+        tableView.setContentState(listContentState: listContentState)
         
+        self.viewModel.$contentState
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] type in
+                guard let self = self else { return }
+                self.listContentState.change(to: type)
+                self.refreshControl.endRefreshing()
+                
+                switch type {
+                case .load:
+                    self.tableView.isUserInteractionEnabled = false
+                case .content:
+                    self.tableView.isUserInteractionEnabled = true
+                case .error:
+                    self.tableView.isUserInteractionEnabled = true
+                }
+            })
+            .store(in: &self.bag)
+    }
+    
+    private func setTableAdapter() {
         adapter = .init(tableView)
         adapter.observableDataSource = viewModel.consumptions
         adapter.titleForHeaderSectionHandler = { [weak self] tableView, section in
@@ -67,24 +107,36 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
             }
             return cell
         }
-//        adapter.numberOfSectionsHandler = { _, _ in
-//            self.refreshControl.endRefreshing()
-//        }
         tableView.register(fromNib: ConsumptionTableViewCell.self)
         tableView.dataSource = adapter
         tableView.delegate = self
-        
-//        refreshControl.addAction(.init(handler: { _ in
-//            self.viewModel.load(clear: true)
-//        }), for: .valueChanged)
-//        tableView.refreshControl = refreshControl
+        tableView.refreshControl = refreshControl
+        refreshControl.addAction(.init(handler: { _ in
+            self.viewModel.load(clear: true)
+        }), for: .valueChanged)
     }
 }
 
 extension ConsumptionListViewController: UITableViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (((scrollView.contentOffset.y + scrollView.frame.size.height) > scrollView.contentSize.height )){
+    // пагинация на IndexPath
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastSection = tableView.numberOfSections - 1
+        let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
+        let lastIndexPath = IndexPath(row: lastRow, section: lastSection)
+        if indexPath == lastIndexPath { // last cell
             self.viewModel.load()
         }
     }
+    
+    // пагинация на положение Y
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        // with frame height
+//        let currentY = scrollView.contentOffset.y + scrollView.frame.size.height
+//        let maxY = scrollView.contentSize.height
+//        if currentY > maxY {
+//            print("Current Y: \(currentY)")
+//            print("Max Y: \(maxY)")
+//            self.viewModel.load()
+//        }
+//    }
 }

@@ -25,6 +25,6 @@ class ConsumptionTableViewCell: UITableViewCell {
         dateLabel.text = dateFormatter.string(from: model.date) //String(describing: model.date)
         titleLabel.text = model.name
         priceLabel.text = String(describing: model.price)
-        priceLabel.textColor = model.price < 0 ? .systemRed : .systemGreen
+        priceLabel.textColor = .systemRed // model.price < 0 ? .systemRed : .systemGreen
     }}
 }

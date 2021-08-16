@@ -19,26 +19,31 @@ final public class ConsumptionCase: Case {
                     t.column("price", .double).notNull()
                 }
             }
-            
-            // FOR TEST
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "dd.MM.yyyy"
-//            var day = 1
-//            for i in 0...400 {
-//                let dateStr = "\(day).04.2021"
-//                var consumption = DTO.Consumption(
-//                    id: nil,
-//                    categoryId: 1,
-//                    date: dateFormatter.date(from: dateStr)!,
-//                    name: "Test #\(i)",
-//                    price: 1000
-//                )
-//                day += 1
-//                if day % 5 == 0 {
-//                    day = 1
-//                }
-//                try consumption.save(db)
-//            }
+        }
+        
+//        try? self.test()
+    }
+    
+    public func test() throws {
+        // FOR TEST
+        try dbQueue.write { db in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            var day = 1
+            for _ in 0...6 {
+                day += 1
+                for i in 0...Int.random(in: 0..<10) {
+                    let dateStr = "\(day).04.2021"
+                    var consumption = DTO.Consumption(
+                        id: nil,
+                        categoryId: 1,
+                        date: dateFormatter.date(from: dateStr)!,
+                        name: "Test #\(i)",
+                        price: 1000
+                    )
+                    try consumption.save(db)
+                }
+            }
         }
     }
     

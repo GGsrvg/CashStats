@@ -13,21 +13,34 @@ class CategoiesViewModel: BaseViewModel {
     
     let categories: ObservableDataSourceOneDimension<DTO.Category> = .init()
     
+    @Published
+    var contentState: ListContentState.TypeState = .content
+    
+    private var isFirstLoad = true
+    
     required init() {
         super.init()
-        self.load()
     }
     
     func load() {
+        if isFirstLoad {
+            contentState = .load
+            isFirstLoad = false
+        }
+        
         self.bl.category.get()
             .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
             .sink { fail in
                 switch fail {
                 case .finished:
-                    print("finished")
+                    self.contentState = self.categories.array.isEmpty ?
+                        .error(title: "Empty", description: "No categories added. Click \"+\" to add.") : .content
                 case .failure(let error):
-                    print(error)
+                    self.contentState = .error(
+                        title: "Error",
+                        description: error.localizedDescription
+                    )
                 }
             } receiveValue: { value in
                 self.categories.set(value)

@@ -21,13 +21,25 @@ class CategoiesViewController: BaseViewController<CategoiesViewModel, EmptyDataI
     
     var adapter: UITableViewAdapter<String?, DTO.Category, String?>!
     
+    let listContentState: ListContentState = {
+        let listContentState = ListContentState()
+        listContentState.translatesAutoresizingMaskIntoConstraints = false
+        return listContentState
+    }()
+    
     deinit {
         adapter?.observableDataSource = nil
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.setNavItem()
+        self.setContentState()
+        self.setTableAdapter()
+        self.viewModel.load()
+    }
+    
+    private func setNavItem() {
         title = "Categories"
         navigationItem.backButtonTitle = "Back"
         navigationItem.rightBarButtonItems = [
@@ -36,7 +48,33 @@ class CategoiesViewController: BaseViewController<CategoiesViewModel, EmptyDataI
                 self.navigationController?.pushViewController(vc, animated: true)
             }, menu: nil)
         ]
+    }
+    
+    private func setContentState() {
+        tableView.setContentState(listContentState: listContentState)
         
+        self.viewModel.$contentState
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { type in
+                self.listContentState.change(to: type)
+                self.refreshControl.endRefreshing()
+                
+                switch type {
+                case .load:
+                    self.tableView.separatorStyle = .none
+                    self.tableView.isUserInteractionEnabled = false
+                case .content:
+                    self.tableView.separatorStyle = .singleLine
+                    self.tableView.isUserInteractionEnabled = true
+                case .error:
+                    self.tableView.separatorStyle = .none
+                    self.tableView.isUserInteractionEnabled = true
+                }
+            })
+            .store(in: &self.bag)
+    }
+    
+    private func setTableAdapter() {
         adapter = .init(tableView)
         adapter.cellForRowHandler = { tableView, indexPath, model in
             let cell = tableView.dequeueReusableCell(withIdentifier: CategoryTableViewCell.reuseIdentifier, for: indexPath)
@@ -47,18 +85,14 @@ class CategoiesViewController: BaseViewController<CategoiesViewModel, EmptyDataI
             
             return cell
         }
-        adapter.numberOfSectionsHandler = { _, _ in
-            self.refreshControl.endRefreshing()
-        }
         adapter.observableDataSource = viewModel.categories
         tableView.register(fromNib: CategoryTableViewCell.self)
         tableView.dataSource = adapter
         tableView.delegate = self
-        
+        tableView.refreshControl = refreshControl
         refreshControl.addAction(.init(handler: { _ in
             self.viewModel.load()
         }), for: .valueChanged)
-        tableView.refreshControl = refreshControl
     }
 }
 
@@ -94,10 +128,10 @@ extension CategoiesViewController: UITableViewDelegate {
             completion(true)
         }
         change.backgroundColor = .systemOrange
-     
+        
         let config = UISwipeActionsConfiguration(actions: [delete, change])
         config.performsFirstActionWithFullSwipe = true
-     
+        
         return config
     }
 }

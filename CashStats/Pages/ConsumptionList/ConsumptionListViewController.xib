@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConsumptionListViewController" customModule="CashStats" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="Ajq-YQ-2ds" id="gqU-Fd-F2C"/>
+                <outlet property="tableView" destination="5eh-oO-vvd" id="3de-Yo-0Wd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,17 +19,17 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Ajq-YQ-2ds" customClass="TableView" customModule="CashStats" customModuleProvider="target">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="insetGrouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="5eh-oO-vvd">
                     <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ajq-YQ-2ds" secondAttribute="trailing" id="CdW-5z-itS"/>
-                <constraint firstItem="Ajq-YQ-2ds" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bSD-HZ-vl9"/>
-                <constraint firstAttribute="bottom" secondItem="Ajq-YQ-2ds" secondAttribute="bottom" id="qmS-sU-eYr"/>
-                <constraint firstItem="Ajq-YQ-2ds" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="sFr-Wo-1Yg"/>
+                <constraint firstItem="5eh-oO-vvd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Dom-T8-wZt"/>
+                <constraint firstItem="5eh-oO-vvd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="NQz-iu-l8E"/>
+                <constraint firstAttribute="bottom" secondItem="5eh-oO-vvd" secondAttribute="bottom" id="bA6-pn-atE"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5eh-oO-vvd" secondAttribute="trailing" id="sTo-Bt-7ni"/>
             </constraints>
             <point key="canvasLocation" x="139" y="139"/>
         </view>
