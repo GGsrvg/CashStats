@@ -9,9 +9,12 @@ import UIKit
 
 class TextFieldTableViewCell: UITableViewCell {
     
+//    let moneyMask = NumberFormatterMask.shared
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var textField: UITextField! { didSet {
+//        textField.delegate = moneyMask
         textField.addAction(UIAction(handler: { [weak self] action in
             guard let self = self else { return }
             self.model?.value = self.textField.text
@@ -34,5 +37,4 @@ class TextFieldTableViewCell: UITableViewCell {
             textField.becomeFirstResponder()
         }
     }
-    
 }

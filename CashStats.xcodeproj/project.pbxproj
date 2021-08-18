@@ -89,6 +89,7 @@
 		5BCF2B3E268B720800A90FCB /* CategoiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF2B3C268B720800A90FCB /* CategoiesViewController.swift */; };
 		5BCF2B3F268B720800A90FCB /* CategoiesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BCF2B3D268B720800A90FCB /* CategoiesViewController.xib */; };
 		5BCF2B43268B783D00A90FCB /* CategoiesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BCF2B42268B783D00A90FCB /* CategoiesViewModel.swift */; };
+		5BDADB3126CAB5730047A157 /* NumberFormatterMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDADB3026CAB5730047A157 /* NumberFormatterMask.swift */; };
 		5BE1352E26A2A94100125063 /* DatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1352D26A2A94100125063 /* DatePresenter.swift */; };
 		5BF623A026A9D59900701E33 /* BL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B243B07268776B900AB880D /* BL.framework */; };
 		5BF623A126A9D59900701E33 /* BL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5B243B07268776B900AB880D /* BL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -295,6 +296,7 @@
 		5BCF2B3C268B720800A90FCB /* CategoiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoiesViewController.swift; sourceTree = "<group>"; };
 		5BCF2B3D268B720800A90FCB /* CategoiesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoiesViewController.xib; sourceTree = "<group>"; };
 		5BCF2B42268B783D00A90FCB /* CategoiesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoiesViewModel.swift; sourceTree = "<group>"; };
+		5BDADB3026CAB5730047A157 /* NumberFormatterMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatterMask.swift; sourceTree = "<group>"; };
 		5BE1352D26A2A94100125063 /* DatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePresenter.swift; sourceTree = "<group>"; };
 		5BFFC120268F599B00235D3B /* DataBaseStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseStack.swift; sourceTree = "<group>"; };
 		5BFFC123268F59E500235D3B /* DataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBase.swift; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 		5BCF2B0D268A1F5B00A90FCB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				5BDADB2E26CAB5550047A157 /* Masks */,
 				5B500C0D2694CFF7005765D5 /* Coordinator */,
 				5BCF2B0E268A1F6200A90FCB /* EasyRegisterCell */,
 			);
@@ -768,6 +771,22 @@
 				5BCF2B36268AE25400A90FCB /* DiagramSausageView.swift */,
 			);
 			path = DiagramSausage;
+			sourceTree = "<group>";
+		};
+		5BDADB2E26CAB5550047A157 /* Masks */ = {
+			isa = PBXGroup;
+			children = (
+				5BDADB2F26CAB55D0047A157 /* NumberFormatterMask */,
+			);
+			path = Masks;
+			sourceTree = "<group>";
+		};
+		5BDADB2F26CAB55D0047A157 /* NumberFormatterMask */ = {
+			isa = PBXGroup;
+			children = (
+				5BDADB3026CAB5730047A157 /* NumberFormatterMask.swift */,
+			);
+			path = NumberFormatterMask;
 			sourceTree = "<group>";
 		};
 		7BA2E49448D6AAE4DB811145 /* Pods */ = {
@@ -1219,6 +1238,7 @@
 				5B18298D26922ED50011ABA2 /* SegmentControlPresenter.swift in Sources */,
 				5BCF2B3E268B720800A90FCB /* CategoiesViewController.swift in Sources */,
 				5B243A3C268769DA00AB880D /* SceneDelegate.swift in Sources */,
+				5BDADB3126CAB5730047A157 /* NumberFormatterMask.swift in Sources */,
 				5BCF2B10268A1F6F00A90FCB /* EasyRegisterCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

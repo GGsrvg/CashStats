@@ -78,7 +78,10 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
             .sink(receiveValue: { [weak self] type in
                 guard let self = self else { return }
                 self.listContentState.change(to: type)
-                self.refreshControl.endRefreshing()
+                
+                if self.refreshControl.isRefreshing {
+                    self.refreshControl.endRefreshing()
+                }
                 
                 switch type {
                 case .load:
@@ -119,24 +122,22 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
 
 extension ConsumptionListViewController: UITableViewDelegate {
     // пагинация на IndexPath
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastSection = tableView.numberOfSections - 1
-        let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
-        let lastIndexPath = IndexPath(row: lastRow, section: lastSection)
-        if indexPath == lastIndexPath { // last cell
-            self.viewModel.load()
-        }
-    }
-    
-    // пагинация на положение Y
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        // with frame height
-//        let currentY = scrollView.contentOffset.y + scrollView.frame.size.height
-//        let maxY = scrollView.contentSize.height
-//        if currentY > maxY {
-//            print("Current Y: \(currentY)")
-//            print("Max Y: \(maxY)")
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let lastSection = tableView.numberOfSections - 1
+//        let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
+//        let lastIndexPath = IndexPath(row: lastRow, section: lastSection)
+//        if indexPath == lastIndexPath { // last cell
 //            self.viewModel.load()
 //        }
 //    }
+    
+    // пагинация на положение Y
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // with frame height
+        let currentY = scrollView.contentOffset.y + scrollView.frame.size.height
+        let maxY = scrollView.contentSize.height
+        if currentY > maxY {
+            self.viewModel.load()
+        }
+    }
 }
