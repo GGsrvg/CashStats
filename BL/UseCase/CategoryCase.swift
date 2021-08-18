@@ -7,7 +7,6 @@
 
 import Combine
 import DTO
-//import DB
 
 public class CategoryCase {
     public func get() -> AnyPublisher<[DTO.Category], Error> {

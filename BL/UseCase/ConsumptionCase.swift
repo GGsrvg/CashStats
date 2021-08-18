@@ -8,18 +8,13 @@
 import Combine
 import DTO
 
-// for test
-enum A: Error {
-    case limit
-}
-
 public class ConsumptionCase {
     public func get(by category: DTO.Category, from position: Int, count: Int) -> AnyPublisher<[DTO.Consumption], Error> {
         return Deferred { Future<[DTO.Consumption], Error> { promise in
             do {
                 let count = try BL.current.db.consumption.countAll()
                 if count <= position {
-                    throw A.limit
+                    throw BLError.limit
                 }
                 let models = try BL.current.db.consumption.fetch(by: category, from: position, count: count)
                 promise(.success(models))

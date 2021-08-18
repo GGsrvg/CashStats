@@ -21,7 +21,7 @@ class ConsumptionListViewModel: BaseViewModel {
     
     private var isLoad = false
     
-    private let countFetch = 10
+    private let countFetch = 100
     
     required init(category: DTO.Category) {
         self.category = category
