@@ -55,7 +55,7 @@ class ConsumptionListViewModel: BaseViewModel {
                 var dictionaryConsumption: [Date: [DTO.Consumption]] = [:]
 
                 value.forEach {
-                    let components = Calendar.current.dateComponents([.year, .month, .day], from: $0.date)
+                    let components = Calendar.current.dateComponents([.year, .month], from: $0.date)
                     let date = Calendar.current.date(from: components)!
                     
                     if dictionaryConsumption[date] == nil {
@@ -107,6 +107,24 @@ class ConsumptionListViewModel: BaseViewModel {
                 if !sections.isEmpty {
                     self.consumptions.addSections(sections)
                 }
+            }.store(in: &bag)
+    }
+    
+    
+    func delete(indexPath: IndexPath) {
+        let consumption = self.consumptions.array[indexPath.section].rows[indexPath.row]
+        self.bl.consumption.delete(model: consumption)
+            .subscribe(on: DispatchQueue.global())
+            .receive(on: DispatchQueue.main)
+            .sink { fail in
+                switch fail {
+                case .finished:
+                    print("finished")
+                case .failure(let error):
+                    print(error)
+                }
+            } receiveValue: { value in
+                self.consumptions.removeRow(indexPath: indexPath)
             }.store(in: &bag)
     }
 }

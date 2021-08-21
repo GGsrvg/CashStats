@@ -27,6 +27,15 @@ public class ConsumptionCase {
     public func save(model: DTO.Consumption) -> AnyPublisher<DTO.Consumption, Error> {
         return Deferred { Future<DTO.Consumption, Error> { promise in
             do {
+//                if var category = try BL.current.db.category.fetch()
+//                    .first(where: { $0.id == model.categoryId }) {
+//                    category.spentFunds += model.price
+//                    _ = try BL.current.db.category.save(category: category)
+//                    let savedConsumption = try BL.current.db.consumption.save(consumption: model)
+//                    promise(.success((savedConsumption)))
+//                } else {
+//                    throw BLError.categoryNotFound
+//                }
                 let savedCategory = try BL.current.db.consumption.save(consumption: model)
                 promise(.success((savedCategory)))
             } catch {
@@ -39,6 +48,15 @@ public class ConsumptionCase {
     public func delete(model: DTO.Consumption) -> AnyPublisher<Void, Error> {
         return Deferred { Future<Void, Error> { promise in
             do {
+//                if var category = try BL.current.db.category.fetch()
+//                    .first(where: { $0.id == model.categoryId }) {
+//                    category.spentFunds -= model.price
+//                    _ = try BL.current.db.category.save(category: category)
+//                    try BL.current.db.consumption.delete(consumption: model)
+//                    promise(.success(()))
+//                } else {
+//                    throw BLError.categoryNotFound
+//                }
                 try BL.current.db.consumption.delete(consumption: model)
                 promise(.success(()))
             } catch {

@@ -26,7 +26,7 @@ class CategoryTableViewCell: UITableViewCell {
         titleLabel.text = model.name
         periodLabel.text = "\(model.periodType ?? .month)"
         
-        rangeLabel.text = "\(model.spentFunds) / \(model.fundsLimit) $"
+        rangeLabel.text = "\(model.spentFunds.optimalString) / \(model.fundsLimit.optimalString)"
         
         let intSpentFunds = UInt(model.spentFunds)
         let intFundsLimit = UInt(model.fundsLimit)
@@ -36,10 +36,12 @@ class CategoryTableViewCell: UITableViewCell {
             color: color,
             numberVotes: intSpentFunds
         ))
-        diagramSausage.addItem(.init(
-            color: .systemFill,
-            numberVotes: intFundsLimit - intSpentFunds
-        ))
+        if intFundsLimit >= intSpentFunds {
+            diagramSausage.addItem(.init(
+                color: .systemFill,
+                numberVotes: intFundsLimit - intSpentFunds
+            ))
+        }
     }}
     
     override func prepareForReuse() {

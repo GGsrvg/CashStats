@@ -12,8 +12,6 @@ class AddConsumptionViewModel: BaseViewModel {
     
     let fields: ObservableDataSourceOneDimension<AddConsumptionContentType> = .init()
     
-    var consumption: DTO.Consumption?
-    
     private let name = TextFieldPresenter(
         title: "Title",
         placeholder: "Name of consumption",
@@ -25,12 +23,19 @@ class AddConsumptionViewModel: BaseViewModel {
         title: "Price",
         placeholder: "Product price",
         value: nil,
-        keyboardType: .decimalPad
+        keyboardType: .decimalPad,
+        textFieldDelegate: NumberFormatterMask.shared
     )
     
     private let date = DatePresenter(date: Date())
     
     private let category: DTO.Category
+    
+    var consumption: DTO.Consumption? { didSet {
+        name.value = consumption?.name
+        price.value = consumption?.price.optimalString
+        date.date = consumption?.date ?? Date()
+    }}
     
     required init(category: DTO.Category) {
         self.category = category
@@ -64,7 +69,6 @@ class AddConsumptionViewModel: BaseViewModel {
         )
         
         self.bl.consumption.save(model: consumption)
-//            .add(models: [.init(id: "", date: date, name: name, price: price * -1)], to: category)
             .subscribe(on: DispatchQueue.global())
             .receive(on: DispatchQueue.main)
             .sink { [weak self] end in

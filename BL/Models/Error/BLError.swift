@@ -9,4 +9,5 @@ import Foundation
 
 public enum BLError: Error {
     case limit
+    case categoryNotFound
 }

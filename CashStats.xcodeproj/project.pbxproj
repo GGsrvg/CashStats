@@ -74,6 +74,7 @@
 		5BB2061026AB1FB400DAA5FD /* Consumption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2060F26AB1FB400DAA5FD /* Consumption.swift */; };
 		5BB2061526AB21DE00DAA5FD /* CategoryCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2061426AB21DE00DAA5FD /* CategoryCase.swift */; };
 		5BB2061726AB222B00DAA5FD /* Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2061626AB222B00DAA5FD /* Case.swift */; };
+		5BB6C73F26D1112B0016786E /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6C73E26D1112B0016786E /* Double.swift */; };
 		5BC3212D26C445D3007A2BA4 /* UITableView+ListContentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC3212C26C445D3007A2BA4 /* UITableView+ListContentState.swift */; };
 		5BC68B44269E002600C572A1 /* AddConsumptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC68B42269E002600C572A1 /* AddConsumptionViewController.swift */; };
 		5BC68B45269E002600C572A1 /* AddConsumptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BC68B43269E002600C572A1 /* AddConsumptionViewController.xib */; };
@@ -280,6 +281,7 @@
 		5BB2060F26AB1FB400DAA5FD /* Consumption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consumption.swift; sourceTree = "<group>"; };
 		5BB2061426AB21DE00DAA5FD /* CategoryCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCase.swift; sourceTree = "<group>"; };
 		5BB2061626AB222B00DAA5FD /* Case.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Case.swift; sourceTree = "<group>"; };
+		5BB6C73E26D1112B0016786E /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		5BC3212C26C445D3007A2BA4 /* UITableView+ListContentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ListContentState.swift"; sourceTree = "<group>"; };
 		5BC68B42269E002600C572A1 /* AddConsumptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConsumptionViewController.swift; sourceTree = "<group>"; };
 		5BC68B43269E002600C572A1 /* AddConsumptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddConsumptionViewController.xib; sourceTree = "<group>"; };
@@ -705,6 +707,14 @@
 			path = Case;
 			sourceTree = "<group>";
 		};
+		5BB6C73D26D1111C0016786E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5BB6C73E26D1112B0016786E /* Double.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		5BC68B41269E001300C572A1 /* AddConsumption */ = {
 			isa = PBXGroup;
 			children = (
@@ -730,6 +740,7 @@
 		5BCF2B0D268A1F5B00A90FCB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				5BB6C73D26D1111C0016786E /* Extension */,
 				5BDADB2E26CAB5550047A157 /* Masks */,
 				5B500C0D2694CFF7005765D5 /* Coordinator */,
 				5BCF2B0E268A1F6200A90FCB /* EasyRegisterCell */,
@@ -1255,6 +1266,7 @@
 				5BCF2B39268AE26600A90FCB /* DiagramItem.swift in Sources */,
 				5B243A3A268769DA00AB880D /* AppDelegate.swift in Sources */,
 				5B18298D26922ED50011ABA2 /* SegmentControlPresenter.swift in Sources */,
+				5BB6C73F26D1112B0016786E /* Double.swift in Sources */,
 				5BCF2B3E268B720800A90FCB /* CategoiesViewController.swift in Sources */,
 				5B243A3C268769DA00AB880D /* SceneDelegate.swift in Sources */,
 				5BDADB3126CAB5730047A157 /* NumberFormatterMask.swift in Sources */,

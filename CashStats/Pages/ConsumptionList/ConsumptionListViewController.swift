@@ -9,13 +9,18 @@ import UIKit
 import LDS
 import DTO
 
-fileprivate let dateFormatter: DateFormatter = {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .long
-    return dateFormatter
-}()
-
 class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel, ConsumptionListDataInitViewController> {
+    
+    fileprivate let dateFormatter: DateFormatter = {
+        let dateFormatterTemplate = DateFormatter.dateFormat(
+            fromTemplate: "MMMM yyyy",
+            options: 0,
+            locale: Locale.current
+        )
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormatterTemplate
+        return dateFormatter
+    }()
     
     override class func initWith(_ data: ConsumptionListDataInitViewController?) -> Self {
         guard let data = data else { fatalError("data need set") }
@@ -101,7 +106,7 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
         adapter.titleForHeaderSectionHandler = { [weak self] tableView, section in
             guard let self = self else { return nil }
             let date = self.viewModel.consumptions.array[section].header
-            return dateFormatter.string(from: date)
+            return self.dateFormatter.string(from: date)
         }
         adapter.cellForRowHandler = { tableView, indexPath, model in
             let cell = tableView.dequeueReusableCell(withIdentifier: ConsumptionTableViewCell.reuseIdentifier, for: indexPath)
@@ -121,21 +126,40 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
 }
 
 extension ConsumptionListViewController: UITableViewDelegate {
-    // пагинация на IndexPath
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let lastSection = tableView.numberOfSections - 1
-//        let lastRow = tableView.numberOfRows(inSection: lastSection) - 1
-//        let lastIndexPath = IndexPath(row: lastRow, section: lastSection)
-//        if indexPath == lastIndexPath { // last cell
-//            self.viewModel.load()
-//        }
-//    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+            self.viewModel.delete(indexPath: indexPath)
+            completion(true)
+        }
+        delete.backgroundColor = .systemRed
+        
+        let change = UIContextualAction(style: .destructive, title: "Chnage") { (action, view, completion) in
+            let entity = self.viewModel.consumptions.array[indexPath.section].rows[indexPath.row]
+            self.navigationController?.pushViewController(
+                AddConsumptionViewController.initWith(
+                    AddConsumptionDataInitViewController(
+                        category: self.viewModel.category,
+                        consumption: entity
+                    )
+                ),
+                animated: true
+            )
+            completion(true)
+        }
+        change.backgroundColor = .systemOrange
+        
+        let config = UISwipeActionsConfiguration(actions: [delete, change])
+        config.performsFirstActionWithFullSwipe = true
+        
+        return config
+    }
     
     // пагинация на положение Y
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // with frame height
         let currentY = scrollView.contentOffset.y + scrollView.frame.size.height
-        let maxY = scrollView.contentSize.height
+        let maxY = max(scrollView.contentSize.height, scrollView.frame.height)
         if currentY > maxY {
             self.viewModel.load()
         }

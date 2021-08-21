@@ -25,7 +25,8 @@ class AddCategoryViewModel: BaseViewModel {
         title: "Costs limit",
         placeholder: "Period cost limit",
         value: nil,
-        keyboardType: .decimalPad
+        keyboardType: .decimalPad,
+        textFieldDelegate: NumberFormatterMask.shared
     )
     
     lazy var typeSegmentedControl: SegmentControlPresenter = .init(
@@ -42,7 +43,7 @@ class AddCategoryViewModel: BaseViewModel {
     
     var category: DTO.Category? { didSet {
         nameTextField.value = category?.name
-        costsLimitTextField.value = category?.fundsLimit == nil ? nil : String(category!.fundsLimit)
+        costsLimitTextField.value = category?.fundsLimit.optimalString
         typeSegmentedControl.selectedId = category?.periodTypeInt ?? 0
         selectColorWell.selectedColor = category?.colorHEX == nil ? nil : UIColor(rgb: category!.colorHEX)
     }}
@@ -66,16 +67,19 @@ class AddCategoryViewModel: BaseViewModel {
 
         let typeSegment = self.typeSegmentedControl.segments[self.typeSegmentedControl.selectedId]
         
-        var category = DTO.Category(
+        var category = self.category ?? DTO.Category(
             date: Date(),
-            name: name,
-            colorHEX: colorHEX,
+            name: "",
+            colorHEX: 0,
             spentFunds: 0,
-            fundsLimit: fundsLimit,
-            periodTypeInt: typeSegment.id
+            fundsLimit: 0,
+            periodTypeInt: 0
         )
         
-        category.id = self.category?.id
+        category.name = name
+        category.fundsLimit = fundsLimit
+        category.colorHEX = colorHEX
+        category.periodTypeInt = typeSegment.id
         
         self.bl.category.save(model: category)
             .subscribe(on: DispatchQueue.global())

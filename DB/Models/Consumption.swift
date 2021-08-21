@@ -14,7 +14,7 @@ extension DTO.Consumption: FetchableRecord, MutablePersistableRecord {
     public static var databaseSelection: [SQLSelectable] = [AllColumns(), Column.rowID]
     
     enum Columns: String, ColumnExpression {
-        case id, categoryId, date, name, price
+        case categoryId, date, name, price
     }
     
     public init(row: Row) {

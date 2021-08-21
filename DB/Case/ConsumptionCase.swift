@@ -24,6 +24,7 @@ final public class ConsumptionCase: Case {
 //        try? self.test()
     }
     
+    #if DEBUG
     public func test() throws {
         // FOR TEST
         try dbQueue.write { db in
@@ -46,6 +47,7 @@ final public class ConsumptionCase: Case {
             }
         }
     }
+    #endif
     
     public func countAll() throws -> Int {
         return try dbQueue.read { db in
@@ -53,11 +55,22 @@ final public class ConsumptionCase: Case {
         }
     }
     
+    public func fetch(by category: DTO.Category, from fromDate: Date, to toDate: Date) throws -> [DTO.Consumption] {
+        return try dbQueue.read { db in
+            try DTO.Consumption
+                .order(Column.rowID.desc)
+                .filter(DTO.Consumption.Columns.categoryId == category.id)
+                .filter(DTO.Consumption.Columns.date > fromDate)
+                .filter(DTO.Consumption.Columns.date < toDate)
+                .fetchAll(db)
+        }
+    }
+    
     public func fetch(by category: DTO.Category, from position: Int, count: Int) throws -> [DTO.Consumption] {
         return try dbQueue.read { db in
             try DTO.Consumption
                 .order(Column.rowID.desc)
-                .filter(Column("categoryId") == category.id)
+                .filter(DTO.Consumption.Columns.categoryId == category.id)
                 .limit(count, offset: position)
                 .fetchAll(db)
         }
@@ -66,6 +79,18 @@ final public class ConsumptionCase: Case {
     public func save(consumption: DTO.Consumption) throws -> DTO.Consumption {
         var consumption = consumption
         try dbQueue.write { db in
+            let oldCons = try DTO.Consumption.filter(Column.rowID == consumption.id)
+                .fetchOne(db)
+            
+            let diffPrice = consumption.price - (oldCons?.price ?? 0)
+            
+            var category = try DTO.Category
+                .filter(Column.rowID == consumption.categoryId)
+                .fetchOne(db)
+            
+            category?.spentFunds += diffPrice
+            try category?.save(db)
+            
             try consumption.save(db)
         }
         return consumption

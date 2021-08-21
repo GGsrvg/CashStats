@@ -12,12 +12,20 @@ class TextFieldPresenter {
     let placeholder: String?
     var value: String?
     let keyboardType: UIKeyboardType
+    let textFieldDelegate: UITextFieldDelegate?
     
-    internal init(title: String, placeholder: String?, value: String?, keyboardType: UIKeyboardType) {
+    internal init(
+        title: String,
+        placeholder: String?,
+        value: String?,
+        keyboardType: UIKeyboardType = .default,
+        textFieldDelegate: UITextFieldDelegate? = nil
+    ) {
         self.title = title
         self.placeholder = placeholder
         self.value = value
         self.keyboardType = keyboardType
+        self.textFieldDelegate = textFieldDelegate
     }
 
 }

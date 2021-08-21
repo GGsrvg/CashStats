@@ -23,6 +23,10 @@ extension DTO.Category: FetchableRecord, MutablePersistableRecord {
     public static var databaseTableName: String = "Category"
     public static var databaseSelection: [SQLSelectable] = [AllColumns(), Column.rowID]
     
+    enum Columns: String, ColumnExpression {
+        case date, name, colorHEX, spentFounds, foundsLimit, periodTypeInt
+    }
+    
     public init(row: Row) {
         self.init(
             date: row["date"],

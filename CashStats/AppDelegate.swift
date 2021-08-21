@@ -15,12 +15,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         BGTaskScheduler.shared.register(
-            forTaskWithIdentifier: "com.ggsrvg.CashStat.test",
+            forTaskWithIdentifier: "com.ggsrvg.CashStat.calculateConsumption",
             using: DispatchQueue.global()
         ) { task in
             self.handleAppRefresh(task)
         }
         
+            DI.bisnesLayer.calculateConsumption()
         return true
     }
     
@@ -29,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func scheduleAppRefresh() {
-        let request = BGAppRefreshTaskRequest(identifier: "com.ggsrvg.CashStat.test")
+        let request = BGAppRefreshTaskRequest(identifier: "com.ggsrvg.CashStat.calculateConsumption")
         // Fetch no earlier than 30 minutes from now
         request.earliestBeginDate = Date(timeIntervalSinceNow: 30 * 60)
         
@@ -45,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 1
         queue.addOperation {
-            try? DI.bisnesLayer.db.consumption.test()
+            DI.bisnesLayer.calculateConsumption()
         }
 
         task.expirationHandler = {

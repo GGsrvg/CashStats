@@ -22,9 +22,9 @@ class ConsumptionTableViewCell: UITableViewCell {
     
     var model: DTO.Consumption? { didSet {
         guard let model = model else { return }
-        dateLabel.text = dateFormatter.string(from: model.date) //String(describing: model.date)
+        dateLabel.text = dateFormatter.string(from: model.date)
         titleLabel.text = model.name
-        priceLabel.text = String(describing: model.price)
+        priceLabel.text = String(describing: model.price.optimalString)
         priceLabel.textColor = .systemRed // model.price < 0 ? .systemRed : .systemGreen
     }}
 }
