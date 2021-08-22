@@ -24,6 +24,8 @@ class AddCategoryViewController: BaseViewController<AddCategoryViewModel, AddCat
         adapter.observableDataSource = nil
     }
     
+    override var overrideBackButtonAction: Bool { get { true} }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

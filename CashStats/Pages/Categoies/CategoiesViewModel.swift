@@ -48,20 +48,42 @@ class CategoiesViewModel: BaseViewModel {
     }
     
     func delete(indexPath: IndexPath) {
-        let category = self.categories.array[indexPath.row]
-        self.bl.category.delete(model: category)
-            .subscribe(on: DispatchQueue.global())
-            .receive(on: DispatchQueue.main)
-            .sink { fail in
-                switch fail {
-                case .finished:
-                    print("finished")
-                case .failure(let error):
-                    print(error)
-                }
-            } receiveValue: { value in
-                self.categories.removeRow(at: indexPath.row)
-            }.store(in: &bag)
+        func deleteRequest() {
+            let category = self.categories.array[indexPath.row]
+            self.bl.category.delete(model: category)
+                .subscribe(on: DispatchQueue.global())
+                .receive(on: DispatchQueue.main)
+                .sink { fail in
+                    switch fail {
+                    case .finished:
+                        print("finished")
+                    case .failure(let error):
+                        print(error)
+                    }
+                } receiveValue: { value in
+                    self.categories.removeRow(at: indexPath.row)
+                }.store(in: &bag)
+        }
+        
+        DI.alertCoordinator.alert(
+            title: "Delete category?",
+            message: "After that, you will not be able to restore the category.",
+            preferredStyle: .alert,
+            actions: [
+                .init(
+                    title: "Yes",
+                    style: .cancel,
+                    handler: { action in
+                        deleteRequest()
+                    }
+                ),
+                .init(
+                    title: "No",
+                    style: .default,
+                    handler: nil
+                )
+            ]
+        )
     }
 }
 

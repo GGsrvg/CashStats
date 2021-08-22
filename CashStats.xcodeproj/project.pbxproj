@@ -75,6 +75,8 @@
 		5BB2061526AB21DE00DAA5FD /* CategoryCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2061426AB21DE00DAA5FD /* CategoryCase.swift */; };
 		5BB2061726AB222B00DAA5FD /* Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB2061626AB222B00DAA5FD /* Case.swift */; };
 		5BB6C73F26D1112B0016786E /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6C73E26D1112B0016786E /* Double.swift */; };
+		5BB6C74226D13FB80016786E /* AlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6C74126D13FB80016786E /* AlertCoordinator.swift */; };
+		5BB6C74426D245C90016786E /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB6C74326D245C90016786E /* UIView.swift */; };
 		5BC3212D26C445D3007A2BA4 /* UITableView+ListContentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC3212C26C445D3007A2BA4 /* UITableView+ListContentState.swift */; };
 		5BC68B44269E002600C572A1 /* AddConsumptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC68B42269E002600C572A1 /* AddConsumptionViewController.swift */; };
 		5BC68B45269E002600C572A1 /* AddConsumptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BC68B43269E002600C572A1 /* AddConsumptionViewController.xib */; };
@@ -282,6 +284,8 @@
 		5BB2061426AB21DE00DAA5FD /* CategoryCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCase.swift; sourceTree = "<group>"; };
 		5BB2061626AB222B00DAA5FD /* Case.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Case.swift; sourceTree = "<group>"; };
 		5BB6C73E26D1112B0016786E /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		5BB6C74126D13FB80016786E /* AlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCoordinator.swift; sourceTree = "<group>"; };
+		5BB6C74326D245C90016786E /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		5BC3212C26C445D3007A2BA4 /* UITableView+ListContentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ListContentState.swift"; sourceTree = "<group>"; };
 		5BC68B42269E002600C572A1 /* AddConsumptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddConsumptionViewController.swift; sourceTree = "<group>"; };
 		5BC68B43269E002600C572A1 /* AddConsumptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddConsumptionViewController.xib; sourceTree = "<group>"; };
@@ -711,8 +715,17 @@
 			isa = PBXGroup;
 			children = (
 				5BB6C73E26D1112B0016786E /* Double.swift */,
+				5BB6C74326D245C90016786E /* UIView.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		5BB6C74026D13F890016786E /* AlertCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				5BB6C74126D13FB80016786E /* AlertCoordinator.swift */,
+			);
+			path = AlertCoordinator;
 			sourceTree = "<group>";
 		};
 		5BC68B41269E001300C572A1 /* AddConsumption */ = {
@@ -742,6 +755,7 @@
 			children = (
 				5BB6C73D26D1111C0016786E /* Extension */,
 				5BDADB2E26CAB5550047A157 /* Masks */,
+				5BB6C74026D13F890016786E /* AlertCoordinator */,
 				5B500C0D2694CFF7005765D5 /* Coordinator */,
 				5BCF2B0E268A1F6200A90FCB /* EasyRegisterCell */,
 			);
@@ -1237,6 +1251,7 @@
 				5B1497D3268869CF00777AF3 /* ConsumptionListViewController.swift in Sources */,
 				5B5EBC4E268D7667004AD7C1 /* ConsumptionListViewModel.swift in Sources */,
 				5B8EE70A269774EE00383873 /* ColorWellPresenter.swift in Sources */,
+				5BB6C74226D13FB80016786E /* AlertCoordinator.swift in Sources */,
 				5B1A64E3268E30CE00CA07D3 /* TextFieldTableViewCell.swift in Sources */,
 				5B0F702826A733D200ACBFDD /* ConsumptionListDataInitViewController.swift in Sources */,
 				5B48E396269376D40069F1E5 /* Button.swift in Sources */,
@@ -1265,6 +1280,7 @@
 				5B243AEB2687759F00AB880D /* BaseViewController.swift in Sources */,
 				5BCF2B39268AE26600A90FCB /* DiagramItem.swift in Sources */,
 				5B243A3A268769DA00AB880D /* AppDelegate.swift in Sources */,
+				5BB6C74426D245C90016786E /* UIView.swift in Sources */,
 				5B18298D26922ED50011ABA2 /* SegmentControlPresenter.swift in Sources */,
 				5BB6C73F26D1112B0016786E /* Double.swift in Sources */,
 				5BCF2B3E268B720800A90FCB /* CategoiesViewController.swift in Sources */,

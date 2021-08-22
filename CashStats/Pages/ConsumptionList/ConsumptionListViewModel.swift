@@ -112,19 +112,41 @@ class ConsumptionListViewModel: BaseViewModel {
     
     
     func delete(indexPath: IndexPath) {
-        let consumption = self.consumptions.array[indexPath.section].rows[indexPath.row]
-        self.bl.consumption.delete(model: consumption)
-            .subscribe(on: DispatchQueue.global())
-            .receive(on: DispatchQueue.main)
-            .sink { fail in
-                switch fail {
-                case .finished:
-                    print("finished")
-                case .failure(let error):
-                    print(error)
-                }
-            } receiveValue: { value in
-                self.consumptions.removeRow(indexPath: indexPath)
-            }.store(in: &bag)
+        func deleteRequest() {
+            let consumption = self.consumptions.array[indexPath.section].rows[indexPath.row]
+            self.bl.consumption.delete(model: consumption)
+                .subscribe(on: DispatchQueue.global())
+                .receive(on: DispatchQueue.main)
+                .sink { fail in
+                    switch fail {
+                    case .finished:
+                        print("finished")
+                    case .failure(let error):
+                        print(error)
+                    }
+                } receiveValue: { value in
+                    self.consumptions.removeRow(indexPath: indexPath)
+                }.store(in: &bag)
+        }
+        
+        DI.alertCoordinator.alert(
+            title: "Delete category?",
+            message: "After that, you will not be able to restore the category.",
+            preferredStyle: .alert,
+            actions: [
+                .init(
+                    title: "Yes",
+                    style: .cancel,
+                    handler: { action in
+                        deleteRequest()
+                    }
+                ),
+                .init(
+                    title: "No",
+                    style: .default,
+                    handler: nil
+                )
+            ]
+        )
     }
 }

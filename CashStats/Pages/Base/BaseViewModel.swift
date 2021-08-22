@@ -14,9 +14,15 @@ class BaseViewModel: NSObject {
     
     let coordinator = DI.coordinator
     
+    var alertCoordinator = DI.alertCoordinator
+    
     var bl: BL = DI.bisnesLayer
     
     required override init() {
         
+    }
+    
+    func close () {
+        coordinator.popTo()
     }
 }

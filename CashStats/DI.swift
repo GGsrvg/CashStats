@@ -10,5 +10,6 @@ import BL
 
 class DI {
     static let coordinator = Coordinator()
+    static let alertCoordinator = AlertCoordinator()
     static let bisnesLayer: BL = BL.current
 }

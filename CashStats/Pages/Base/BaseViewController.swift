@@ -24,9 +24,13 @@ class BaseViewController<VM: BaseViewModel, DI: BaseDataInitViewController>: UIV
         fatalError("no can use default implementation")
     }
     
+    private var _backTapGestureRecognizer: UITapGestureRecognizer?
+    
     let viewModel: VM
     
     var bag = Set<AnyCancellable>()
+    
+    open var overrideBackButtonAction: Bool { get { false } }
     
     init(viewModel: VM) {
         self.viewModel = viewModel
@@ -35,5 +39,30 @@ class BaseViewController<VM: BaseViewModel, DI: BaseDataInitViewController>: UIV
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.overrideBackButton()
+    }
+    
+    private func overrideBackButton() {
+        guard let navigationBar = self.navigationController?.navigationBar,
+              let _UINavigationBarContentView = navigationBar.subview(of: NSClassFromString("_UINavigationBarContentView")),
+              let back = _UINavigationBarContentView.subview(of: NSClassFromString("_UIButtonBarButton"))
+        else { return }
+        
+        if overrideBackButtonAction {
+            let backTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(_backButtonAction))
+            back.addGestureRecognizer(backTapGestureRecognizer)
+            if let _backTapGestureRecognizer = _backTapGestureRecognizer {
+                back.removeGestureRecognizer(_backTapGestureRecognizer)
+            }
+            _backTapGestureRecognizer = backTapGestureRecognizer
+        }
+    }
+    
+    @objc private func _backButtonAction() {
+        self.viewModel.close()
     }
 }

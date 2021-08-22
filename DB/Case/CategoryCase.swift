@@ -41,6 +41,11 @@ final public class CategoryCase: Case {
     
     public func delete(category: DTO.Category) throws {
         try dbQueue.write { db -> Void in
+            
+            try DTO.Consumption
+                .filter(DTO.Consumption.Columns.categoryId == category.id)
+                .deleteAll(db)
+            
             try category.delete(db)
         }
     }

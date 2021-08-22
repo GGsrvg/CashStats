@@ -98,6 +98,13 @@ final public class ConsumptionCase: Case {
     
     public func delete(consumption: DTO.Consumption) throws {
         try dbQueue.write { db -> Void in
+            var category = try DTO.Category
+                .filter(Column.rowID == consumption.categoryId)
+                .fetchOne(db)
+            
+            category?.spentFunds -= consumption.price
+            
+            try category?.save(db)
             try consumption.delete(db)
         }
     }
