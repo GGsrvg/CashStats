@@ -60,8 +60,10 @@ class AddCategoryViewModel: BaseViewModel {
     }
     
     func save() {
+        let formatter = NumberFormatterMask.shared
         guard let name = self.nameTextField.value,
-              let fundsLimit = Double(self.costsLimitTextField.value ?? "0"),
+              let formattedValue = formatter.numberFormatter.number(from: self.costsLimitTextField.value ?? "0"),
+              let fundsLimit = Double(exactly: formattedValue),
               let colorHEX = self.selectColorWell.selectedColor?.rgb()
         else { return }
 
