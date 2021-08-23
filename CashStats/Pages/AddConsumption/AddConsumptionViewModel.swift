@@ -54,7 +54,10 @@ class AddConsumptionViewModel: BaseViewModel {
     func save() {
         guard let categoryId = self.category.id,
               let name = self.name.value,
-              let price = Double(self.price.value ?? "0"),
+              let priceString = self.price.value?
+                .components(separatedBy: CharacterSet.decimalDigits.inverted)
+                .joined(),
+              let price = Double(priceStrings),
               !name.isEmpty && price != 0
         else { return }
         

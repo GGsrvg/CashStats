@@ -25,6 +25,7 @@ class TextFieldTableViewCell: UITableViewCell {
         textField.placeholder = model.placeholder
         textField.keyboardType = model.keyboardType
         textField.delegate = model.textFieldDelegate
+        _ = textField.delegate?.textField?(textField, shouldChangeCharactersIn: NSRange(), replacementString: "")
     }}
 
     override func setSelected(_ selected: Bool, animated: Bool) {
