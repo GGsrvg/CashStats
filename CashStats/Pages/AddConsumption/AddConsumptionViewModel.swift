@@ -57,7 +57,7 @@ class AddConsumptionViewModel: BaseViewModel {
               let priceString = self.price.value?
                 .components(separatedBy: CharacterSet.decimalDigits.inverted)
                 .joined(),
-              let price = Double(priceStrings),
+              let price = Double(priceString),
               !name.isEmpty && price != 0
         else { return }
         
