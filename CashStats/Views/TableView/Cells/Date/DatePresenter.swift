@@ -15,12 +15,8 @@ class DatePresenter {
     var date: Date
 }
 
-extension DatePresenter: Hashable {
+extension DatePresenter: Equatable {
     static func == (lhs: DatePresenter, rhs: DatePresenter) -> Bool {
         lhs === rhs
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(date.hashValue)
     }
 }

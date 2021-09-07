@@ -17,13 +17,9 @@ class SegmentControlPresenter {
     }
 }
 
-extension SegmentControlPresenter: Hashable {
+extension SegmentControlPresenter: Equatable {
     static func == (lhs: SegmentControlPresenter, rhs: SegmentControlPresenter) -> Bool {
         lhs === rhs
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        
     }
 }
 

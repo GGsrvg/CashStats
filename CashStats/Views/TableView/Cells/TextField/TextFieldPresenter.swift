@@ -30,12 +30,8 @@ class TextFieldPresenter {
 
 }
 
-extension TextFieldPresenter: Hashable {
+extension TextFieldPresenter: Equatable {
     static func == (lhs: TextFieldPresenter, rhs: TextFieldPresenter) -> Bool {
         lhs === rhs
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        
     }
 }

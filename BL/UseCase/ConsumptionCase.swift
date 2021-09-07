@@ -13,7 +13,7 @@ public class ConsumptionCase {
         return Deferred { Future<[DTO.Consumption], Error> { promise in
             do {
                 let count = try BL.current.db.consumption.countAll()
-                if count <= position {
+                if count < position {
                     throw BLError.limit
                 }
                 let models = try BL.current.db.consumption.fetch(by: category, from: position, count: count)

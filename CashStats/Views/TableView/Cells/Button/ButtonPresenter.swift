@@ -24,12 +24,8 @@ class ButtonPresenter {
     }
 }
 
-extension ButtonPresenter: Hashable {
+extension ButtonPresenter: Equatable {
     static func == (lhs: ButtonPresenter, rhs: ButtonPresenter) -> Bool {
         lhs === rhs
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        
     }
 }

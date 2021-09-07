@@ -52,10 +52,6 @@ class ConsumptionListViewController: BaseViewController<ConsumptionListViewModel
         self.setNavItem()
         self.setContentState()
         self.setTableAdapter()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         self.viewModel.load()
     }
     

@@ -17,13 +17,8 @@ class ColorWellPresenter {
     }
 }
 
-extension ColorWellPresenter: Hashable {
+extension ColorWellPresenter: Equatable {
     static func == (lhs: ColorWellPresenter, rhs: ColorWellPresenter) -> Bool {
         lhs === rhs
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.title.hash)
-        hasher.combine(self.selectedColor?.hash)
     }
 }

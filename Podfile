@@ -6,7 +6,8 @@ target 'CashStats' do
   use_frameworks!
   
   # Pods for CashStats
-  pod 'LDS', '~> 2.0'
+  pod 'R.swift', '~> 5'
+  pod 'LDS', '2.1.0'
 end
 
 target 'DTO' do

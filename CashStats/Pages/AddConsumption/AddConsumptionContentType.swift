@@ -12,7 +12,7 @@ enum AddConsumptionContentType {
     case date(model: DatePresenter)
 }
 
-extension AddConsumptionContentType: Hashable {
+extension AddConsumptionContentType: Equatable {
 //    func hash(into hasher: inout Hasher) {
 //        switch self {
 //        case .textField(model: let model):

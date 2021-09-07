@@ -14,17 +14,5 @@ enum AddCategoryContentType {
     case colorWell(model: ColorWellPresenter)
 }
 
-extension AddCategoryContentType: Hashable {
-    func hash(into hasher: inout Hasher) {
-        switch self {
-        case .textField(model: let model):
-            hasher.combine(model.hashValue)
-        case .segmentedControl(model: let model):
-            hasher.combine(model.hashValue)
-        case .button(model: let model):
-            hasher.combine(model.hashValue)
-        case .colorWell(model: let model):
-            hasher.combine(model.hashValue)
-        }
-    }
+extension AddCategoryContentType: Equatable {
 }
